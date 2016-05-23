@@ -9,6 +9,7 @@ This is simple java app that can be started from `boot/target` using this comman
 ### Configuration ###
 
 Each module should contain `moduleName.properties` to fulfill basics.
+
 All configuration properties can be override in `application.properties`. This file is inside boot jar.
 
 ### Dependencies ###
