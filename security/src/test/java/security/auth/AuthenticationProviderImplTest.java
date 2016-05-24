@@ -12,8 +12,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import rent.common.ValidationException;
 import rent.domain.security.SessionUser;
-import rent.api.user.UserAuthenticationDto;
-import rent.api.user.UserAuthenticationRepository;
+import rent.repo.api.user.UserAuthenticationDto;
+import rent.repo.api.user.UserAuthenticationRepository;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.fest.assertions.Assertions.assertThat;
@@ -26,7 +26,27 @@ public class AuthenticationProviderImplTest {
 
     static final String PASSWORD = "password";
     static final String USER_NAME = "testUser";
-    private static final UserAuthenticationDto AUTH_1 = () -> 1;
+    private static final UserAuthenticationDto AUTH_1 = new UserAuthenticationDto() {
+        @Override
+        public long getUserId() {
+            return 1;
+        }
+
+        @Override
+        public String getPassword() {
+            return null;
+        }
+
+        @Override
+        public String getUserName() {
+            return null;
+        }
+
+        @Override
+        public String getLastName() {
+            return null;
+        }
+    };
 
     AuthenticationProviderImpl authenticationProvider;
 

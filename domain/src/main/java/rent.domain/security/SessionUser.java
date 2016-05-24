@@ -1,19 +1,19 @@
 package rent.domain.security;
 
-import rent.api.user.UserAuthenticationDto;
+import rent.repo.api.user.UserAuthenticationDto;
 
 import java.io.Serializable;
 
 public class SessionUser implements Serializable {
     private static final long serialVersionUID = 1;
-    private final int userId;
+    private final long userId;
 
 
     public SessionUser(UserAuthenticationDto userAuthenticationDto) {
         this.userId = userAuthenticationDto.getUserId();
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
@@ -30,6 +30,6 @@ public class SessionUser implements Serializable {
 
     @Override
     public int hashCode() {
-        return userId;
+        return (int) userId;
     }
 }

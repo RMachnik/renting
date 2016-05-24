@@ -9,19 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>rest</artifactId>
-
+    <artifactId>repository-static</artifactId>
     <dependencies>
         <dependency>
             <groupId>renting</groupId>
-            <artifactId>security</artifactId>
+            <artifactId>repository-api</artifactId>
             <version>${parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>renting</groupId>
-            <artifactId>repository-static</artifactId>
-            <version>${parent.version}</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 

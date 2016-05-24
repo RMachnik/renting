@@ -98,7 +98,7 @@ public class ApiAuthController {
 
     static class UserJson {
 
-        private final int userId;
+        private final long userId;
 
         UserJson(SessionUser user) {
             this.userId = user.getUserId();

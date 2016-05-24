@@ -1,4 +1,4 @@
-package rent.api.user;
+package rent.repo.api.user;
 
 
 public interface UserAuthenticationRepository {

@@ -9,8 +9,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import rent.domain.security.SessionUser;
-import rent.api.user.UserAuthenticationDto;
-import rent.api.user.UserAuthenticationRepository;
+import rent.repo.api.user.UserAuthenticationDto;
+import rent.repo.api.user.UserAuthenticationRepository;
 
 import java.util.List;
 

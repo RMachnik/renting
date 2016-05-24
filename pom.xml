@@ -16,6 +16,7 @@
         <module>rest</module>
         <module>repository-db</module>
         <module>repository-api</module>
+        <module>repository-static</module>
     </modules>
 
     <parent>

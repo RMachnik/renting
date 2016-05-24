@@ -1,5 +1,6 @@
 package security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.BootGlobalAuthenticationConfiguration;
 import org.springframework.boot.autoconfigure.security.SecurityDataConfiguration;
@@ -13,7 +14,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
-import rent.api.user.Repositories;
+import rent.repo.api.Repositories;
+import rent.repo.db.RepoDbConfig;
 import security.auth.AuthenticationProviderImpl;
 
 import static security.auth.UserRole.USER;
@@ -22,12 +24,16 @@ import static security.auth.UserRole.USER;
 @Import(value = {SpringBootWebSecurityConfiguration.class,
         BootGlobalAuthenticationConfiguration.class,
         SecurityDataConfiguration.class,
-        AllowedOriginsConfig.class
+        AllowedOriginsConfig.class,
+        RepoDbConfig.class
 })
 public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${security.http.enabled:true}")
     boolean securityEnabled;
+
+    @Autowired
+    Repositories repositories;
 
     @Bean
     CsrfTokenRepository csrfTokenRepository() {
@@ -35,13 +41,8 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    Repositories repositories() {
-        return () -> (userName, password) -> () -> 1;
-    }
-
-    @Bean
     AuthenticationProvider authenticationProvider() {
-        return new AuthenticationProviderImpl(repositories().getUserAuthenticationRepository());
+        return new AuthenticationProviderImpl(repositories.getUserRepository());
     }
 
     @Override

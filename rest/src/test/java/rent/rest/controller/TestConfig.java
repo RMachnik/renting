@@ -6,7 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
-import rent.api.user.Repositories;
+import rent.repo.api.Repositories;
+import rent.repo.stationary.StaticRepositories;
 import rent.rest.controller.util.RestEndpoint;
 
 @Configuration
@@ -29,11 +30,6 @@ public class TestConfig {
     @Bean
     @Profile("test")
     Repositories repositories() {
-        return () -> (userName, password) -> {
-            if (userName.equals(username) && password.equals(pass)) {
-                return () -> 1;
-            }
-            return null;
-        };
+        return new StaticRepositories();
     }
 }
