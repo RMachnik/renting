@@ -9,9 +9,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import rent.repo.stationary.user.StaticUserAuthenticationDto;
 import rent.rest.RestConfig;
-import rent.rest.controller.util.RestCredentials;
 import rent.rest.controller.util.RestEndpoint;
 
 import static com.jayway.restassured.RestAssured.given;
@@ -45,9 +43,6 @@ public class ApiAuthControllerTest {
 
     @Autowired
     private RestEndpoint url;
-
-    @Autowired
-    private RestCredentials credentials;
 
     @Test
     public void shouldRedirectToLoginPageWhenNotAuthenticated() {
