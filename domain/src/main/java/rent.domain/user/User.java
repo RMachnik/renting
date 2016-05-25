@@ -1,5 +1,8 @@
 package rent.domain.user;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 import rent.repo.api.Repositories;
 import rent.repo.api.user.UserAuthenticationDto;
 import rent.repo.api.user.UserRepository;
@@ -8,6 +11,9 @@ import java.util.Optional;
 
 import static java.util.Optional.of;
 
+@Getter
+@ToString
+@EqualsAndHashCode
 public class User {
 
     private final long id;
@@ -23,18 +29,6 @@ public class User {
         this.id = userAuthenticationDto.getUserId();
         this.userName = userAuthenticationDto.getUserName();
         this.password = userAuthenticationDto.getPassword();
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public UserDetails getUserDetails() {

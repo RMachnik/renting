@@ -2,7 +2,7 @@ package rent.repo.api.user;
 
 public interface UserRepository extends UserAuthenticationRepository {
 
-    void createUser(UserAuthenticationDto userAuthenticationDto);
+    void addUser(UserAuthenticationDto userAuthenticationDto);
 
     UserDetailsDto getUserDetails();
 }

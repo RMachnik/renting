@@ -14,7 +14,7 @@ public class StaticUserRepository implements UserRepository {
     public static final List<UserAuthenticationDto> USERS = newArrayList(USER_AUTH_DTO);
 
     @Override
-    public void createUser(UserAuthenticationDto userAuthenticationDto) {
+    public void addUser(UserAuthenticationDto userAuthenticationDto) {
 
     }
 

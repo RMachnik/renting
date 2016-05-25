@@ -63,6 +63,5 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
                 authentication.getCredentials() != null && StringUtils.isBlank(authentication.getCredentials().toString())) {
             throw new RuntimeException("Authentication validation failed.");
         }
-
     }
 }

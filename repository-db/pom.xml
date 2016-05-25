@@ -25,5 +25,11 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
+        <dependency>
+            <groupId>renting</groupId>
+            <artifactId>repository-static</artifactId>
+            <version>${parent.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

@@ -8,11 +8,11 @@ import java.util.List;
 
 import static com.google.common.collect.Iterables.getFirst;
 
-public class UserAuthRepoImpl implements UserRepository {
+public class UserRepoImpl implements UserRepository {
 
     private final UserCrudRepository userCrudRepository;
 
-    public UserAuthRepoImpl(UserCrudRepository userCrudRepository) {
+    public UserRepoImpl(UserCrudRepository userCrudRepository) {
         this.userCrudRepository = userCrudRepository;
     }
 
@@ -23,7 +23,7 @@ public class UserAuthRepoImpl implements UserRepository {
     }
 
     @Override
-    public void createUser(UserAuthenticationDto userAuthenticationDto) {
+    public void addUser(UserAuthenticationDto userAuthenticationDto) {
         UserAuthenticationEntity authDto = new UserAuthenticationEntity(userAuthenticationDto);
         userCrudRepository.save(authDto);
     }

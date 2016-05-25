@@ -22,6 +22,7 @@ All configuration properties can be override in `application.properties`. This f
 is needed to create such fully functional object. All objects should be immutable! 
 Domain objects should be created based on interfaces that will sit in repositories-api, creation of objects should rely on abstraction.
 * repository-api - interface of repository, we might want to change underlying repo for different db or sth else 
+* repository-static - static implementation of repositories, mainly for testing domain
 that's why we need such repository-api, all repositories should return some dto implementations.
 * rest - module with all rest endpoints
 * security - configuration of spring security
@@ -33,3 +34,4 @@ You need to have installed following apps to be able to build and run Renting-ba
 
 * java 1.8
 * maven
+* lombok plugin for Intellij - https://projectlombok.org/features/index.html
