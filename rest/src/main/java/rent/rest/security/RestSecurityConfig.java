@@ -60,6 +60,7 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
                     .regexMatchers("/healthcheck").permitAll()
                     .regexMatchers("/auth").permitAll()
                     .regexMatchers("/register").permitAll()
+                    .regexMatchers("/conf").permitAll()
                     .anyRequest().hasRole(UserRole.USER.name())
                     .and()
                     .formLogin()

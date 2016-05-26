@@ -20,6 +20,7 @@ All configuration properties can be override in `application.properties`. This f
 * common - module for common things like utils, validators
 * domain - module with domain implementation, domain objects should encapsulate all repository calls and do what 
 is needed to create such fully functional object. All objects should be immutable! 
+Domain objects should't have any spring dependencies. 
 Domain objects should be created based on interfaces that will sit in repositories-api, creation of objects should rely on abstraction.
 * repository-api - interface of repository, we might want to change underlying repo for different db or sth else 
 * repository-db - implementation of repository-api based on spring-data
