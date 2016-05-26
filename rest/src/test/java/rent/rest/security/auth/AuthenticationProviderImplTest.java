@@ -1,4 +1,4 @@
-package security.auth;
+package rent.rest.security.auth;
 
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.junit.Before;
@@ -19,7 +19,11 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.only;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AuthenticationProviderImplTest {

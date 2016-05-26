@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 
 public class Validators {
@@ -26,7 +27,7 @@ public class Validators {
     }
 
     public static void nullOrEmpty(String str, String propertyName) {
-        if (str != null && !str.isEmpty()) {
+        if (!isNotBlank(str)) {
             throw new ValidationException(VALUE_FOR + propertyName + "' must be null or empty");
         }
     }

@@ -4,9 +4,10 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import rent.repo.api.Repositories;
 import rent.repo.api.user.UserRepository;
-import rent.repo.db.user.UserRepoImpl;
 import rent.repo.db.user.UserCrudRepository;
+import rent.repo.db.user.UserRepoImpl;
 
 @Configuration
 @ComponentScan
@@ -19,7 +20,8 @@ public class RepoDbConfig {
     }
 
     @Bean
-    DbRepositories dbRepositories(UserRepository userRepository) {
+    Repositories dbRepositories(UserRepository userRepository) {
         return new DbRepositories(userRepository);
     }
+
 }

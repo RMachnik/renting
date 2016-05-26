@@ -12,7 +12,6 @@
         <module>boot</module>
         <module>common</module>
         <module>domain</module>
-        <module>security</module>
         <module>rest</module>
         <module>repository-db</module>
         <module>repository-api</module>

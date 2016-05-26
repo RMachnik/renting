@@ -22,10 +22,10 @@ All configuration properties can be override in `application.properties`. This f
 is needed to create such fully functional object. All objects should be immutable! 
 Domain objects should be created based on interfaces that will sit in repositories-api, creation of objects should rely on abstraction.
 * repository-api - interface of repository, we might want to change underlying repo for different db or sth else 
+* repository-db - implementation of repository-api based on spring-data
 * repository-static - static implementation of repositories, mainly for testing domain
 that's why we need such repository-api, all repositories should return some dto implementations.
 * rest - module with all rest endpoints
-* security - configuration of spring security
 
 ### Dependencies ###
 All app dependencies and libs are inside boot jar.

@@ -1,4 +1,4 @@
-package security;
+package rent.rest.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,14 +12,18 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
-import static org.springframework.http.HttpMethod.*;
+import static org.springframework.http.HttpMethod.DELETE;
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.OPTIONS;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
 
 @Configuration
 public class AllowedOriginsConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(AllowedOriginsConfig.class);
 
-    @Value("${security.allowed.origins:@null}")
+    @Value("${rest.allowed.origins:@null}")
     String allowedOrigins;
 
     @Bean

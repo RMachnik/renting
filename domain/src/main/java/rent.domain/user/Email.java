@@ -1,5 +1,8 @@
 package rent.domain.user;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 import rent.common.ValidationException;
 
 import javax.mail.internet.AddressException;
@@ -7,6 +10,9 @@ import javax.mail.internet.InternetAddress;
 
 import static rent.common.util.Validators.notNullNotEmpty;
 
+@Getter
+@ToString
+@EqualsAndHashCode
 public class Email {
 
     private final String address;
@@ -28,30 +34,5 @@ public class Email {
         } catch (AddressException e) {
             throw new ValidationException("Email address has invalid format", e);
         }
-    }
-
-    @Override
-    public int hashCode() {
-        return address != null ? address.hashCode() : 0;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Email email = (Email) o;
-
-        return address != null ? address.equals(email.address) : email.address == null;
-
-    }
-
-    @Override
-    public String toString() {
-        return address;
     }
 }

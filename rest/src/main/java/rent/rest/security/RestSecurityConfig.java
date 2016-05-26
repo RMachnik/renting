@@ -1,4 +1,4 @@
-package security;
+package rent.rest.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,9 +16,8 @@ import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import rent.repo.api.Repositories;
 import rent.repo.db.RepoDbConfig;
-import security.auth.AuthenticationProviderImpl;
-
-import static security.auth.UserRole.USER;
+import rent.rest.security.auth.AuthenticationProviderImpl;
+import rent.rest.security.auth.UserRole;
 
 @Configuration
 @Import(value = {SpringBootWebSecurityConfiguration.class,
@@ -29,7 +28,7 @@ import static security.auth.UserRole.USER;
 })
 public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Value("${security.http.enabled:true}")
+    @Value("${rest.http.enabled:true}")
     boolean securityEnabled;
 
     @Autowired
@@ -60,7 +59,7 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
                     .regexMatchers("^/login\\?expired$").permitAll()
                     .regexMatchers("/healthcheck").permitAll()
                     .regexMatchers("/auth").permitAll()
-                    .anyRequest().hasRole(USER.name())
+                    .anyRequest().hasRole(UserRole.USER.name())
                     .and()
                     .formLogin()
                     .loginPage("/login")

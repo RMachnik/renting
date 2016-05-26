@@ -1,4 +1,4 @@
-package security.auth;
+package rent.rest.security.auth;
 
 public enum UserRole {
     USER;
