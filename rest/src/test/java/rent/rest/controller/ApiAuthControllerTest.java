@@ -1,6 +1,7 @@
 package rent.rest.controller;
 
 import com.jayway.restassured.filter.session.SessionFilter;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import rent.domain.user.User;
+import rent.repo.api.Repositories;
 import rent.rest.RestConfig;
 import rent.rest.controller.util.RestEndpoint;
 
@@ -21,6 +24,7 @@ import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static rent.common.util.StringUtil.j;
+import static rent.repo.stationary.user.StaticRegistrationDto.REGISTRATION_DTO;
 import static rent.repo.stationary.user.StaticSessionUserDto.SESSION_USER_DTO;
 import static rent.rest.controller.util.RestAssuredSpec.getSpec;
 
@@ -40,9 +44,15 @@ public class ApiAuthControllerTest {
 
     @Value("${local.server.port}")
     protected int port;
-
+    @Autowired
+    Repositories repositories;
     @Autowired
     private RestEndpoint url;
+
+    @Before
+    public void setUp() {
+        new User(REGISTRATION_DTO, repositories);
+    }
 
     @Test
     public void shouldRedirectToLoginPageWhenNotAuthenticated() {

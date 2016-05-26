@@ -19,7 +19,7 @@ public class UserRepoImpl implements UserRepository {
 
     @Override
     public SessionUserDto authenticate(String userName, String password) {
-        List<SessionUserDto> userDto = userCrudRepository.findByUserName(userName);
+        List<SessionUserDto> userDto = userCrudRepository.findByUserNameAndPassword(userName, password);
         return getFirst(userDto, null);
     }
 

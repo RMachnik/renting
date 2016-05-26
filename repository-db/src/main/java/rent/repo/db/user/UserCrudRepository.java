@@ -12,4 +12,6 @@ import java.util.List;
 public interface UserCrudRepository extends CrudRepository<SessionUserEntity, Long> {
 
     List<SessionUserDto> findByUserName(String userName);
+
+    List<SessionUserDto> findByUserNameAndPassword(String name, String userName);
 }
