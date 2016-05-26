@@ -23,7 +23,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static rent.repo.stationary.user.StaticSessionUserDto.SESSION_USER_DTO;
+import static rent.repo.stationary.user.StaticUserDto.SESSION_USER_DTO;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AuthenticationProviderImplTest {

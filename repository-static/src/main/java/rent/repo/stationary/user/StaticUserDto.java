@@ -1,10 +1,10 @@
 package rent.repo.stationary.user;
 
-import rent.repo.api.user.SessionUserDto;
+import rent.repo.api.user.UserDto;
 
-public class StaticSessionUserDto {
+public class StaticUserDto {
 
-    public static final SessionUserDto SESSION_USER_DTO = new SessionUserDto() {
+    public static final UserDto SESSION_USER_DTO = new UserDto() {
         @Override
         public long getUserId() {
             return 1;

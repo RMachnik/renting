@@ -1,6 +1,6 @@
 package rent.repo.api.user;
 
-public interface SessionUserDto {
+public interface UserDto {
 
     long getUserId();
 

@@ -1,7 +1,7 @@
 package rent.repo.db.user;
 
 import rent.repo.api.user.RegistrationDto;
-import rent.repo.api.user.SessionUserDto;
+import rent.repo.api.user.UserDto;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class SessionUserEntity implements SessionUserDto {
+public class UserEntity implements UserDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,18 +19,18 @@ public class SessionUserEntity implements SessionUserDto {
     private String password;
     private String email;
 
-    public SessionUserEntity() {
+    public UserEntity() {
     }
 
-    public SessionUserEntity(SessionUserDto sessionUserDto) {
-        id = sessionUserDto.getUserId();
-        userName = sessionUserDto.getUserName();
-        lastName = sessionUserDto.getLastName();
-        password = sessionUserDto.getPassword();
-        email = sessionUserDto.getEmail();
+    public UserEntity(UserDto userDto) {
+        id = userDto.getUserId();
+        userName = userDto.getUserName();
+        lastName = userDto.getLastName();
+        password = userDto.getPassword();
+        email = userDto.getEmail();
     }
 
-    public SessionUserEntity(RegistrationDto registrationDto) {
+    public UserEntity(RegistrationDto registrationDto) {
         userName = registrationDto.getUserName();
         password = registrationDto.getPassword();
         email = registrationDto.getEmail();

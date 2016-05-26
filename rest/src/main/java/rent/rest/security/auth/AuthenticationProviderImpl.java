@@ -10,7 +10,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import rent.domain.security.SessionUser;
 import rent.repo.api.user.AuthRepository;
-import rent.repo.api.user.SessionUserDto;
+import rent.repo.api.user.UserDto;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
             validate(authentication);
             String userName = authentication.getName();
             String password = authentication.getCredentials().toString();
-            SessionUserDto authenticatedUser = authRepository.authenticate(userName, password);
+            UserDto authenticatedUser = authRepository.authenticate(userName, password);
             if (authenticatedUser != null) {
                 logger.info("{} is authenticated.", userName);
                 return new UsernamePasswordAuthenticationToken(new SessionUser(authenticatedUser), PROTECTED, USER_ROLES);

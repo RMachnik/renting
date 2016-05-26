@@ -4,7 +4,7 @@ import org.junit.Test;
 import rent.repo.stationary.StaticRepositories;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static rent.repo.stationary.user.StaticSessionUserDto.SESSION_USER_DTO;
+import static rent.repo.stationary.user.StaticUserDto.SESSION_USER_DTO;
 
 public class UserTest {
 

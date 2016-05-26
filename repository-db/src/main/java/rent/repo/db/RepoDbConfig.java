@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import rent.repo.api.Repositories;
 import rent.repo.api.user.UserRepository;
-import rent.repo.db.user.UserCrudRepository;
+import rent.repo.db.user.UserCrudRepo;
 import rent.repo.db.user.UserRepoImpl;
 
 @Configuration
@@ -15,8 +15,8 @@ import rent.repo.db.user.UserRepoImpl;
 public class RepoDbConfig {
 
     @Bean
-    UserRepository userRepository(UserCrudRepository userCrudRepository) {
-        return new UserRepoImpl(userCrudRepository);
+    UserRepository userRepository(UserCrudRepo userCrudRepo) {
+        return new UserRepoImpl(userCrudRepo);
     }
 
     @Bean

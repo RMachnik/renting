@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.ToString;
 import rent.repo.api.Repositories;
 import rent.repo.api.user.RegistrationDto;
-import rent.repo.api.user.SessionUserDto;
+import rent.repo.api.user.UserDto;
 import rent.repo.api.user.UserRepository;
 
 import java.util.Optional;
@@ -29,11 +29,11 @@ public class User {
     public User(String userName, String password, Repositories repositories) {
         this.userRepository = repositories.getUserRepository();
 
-        SessionUserDto sessionUserDto = userRepository.authenticate(userName, password);
-        this.id = sessionUserDto.getUserId();
-        this.userName = sessionUserDto.getUserName();
-        this.password = sessionUserDto.getPassword();
-        this.email = new Email(sessionUserDto.getEmail());
+        UserDto userDto = userRepository.authenticate(userName, password);
+        this.id = userDto.getUserId();
+        this.userName = userDto.getUserName();
+        this.password = userDto.getPassword();
+        this.email = new Email(userDto.getEmail());
     }
 
     //todo this operation should trigger sending activation email

@@ -16,6 +16,7 @@
         <module>repository-db</module>
         <module>repository-api</module>
         <module>repository-static</module>
+        <module>mail</module>
     </modules>
 
     <parent>

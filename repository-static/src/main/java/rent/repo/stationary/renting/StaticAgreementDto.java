@@ -2,7 +2,7 @@ package rent.repo.stationary.renting;
 
 import rent.repo.api.renting.AgreementDto;
 
-import static rent.repo.stationary.user.StaticSessionUserDto.SESSION_USER_DTO;
+import static rent.repo.stationary.user.StaticUserDto.SESSION_USER_DTO;
 
 public class StaticAgreementDto {
 

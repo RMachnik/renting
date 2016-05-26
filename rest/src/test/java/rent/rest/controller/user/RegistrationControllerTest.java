@@ -19,7 +19,7 @@ import static java.lang.String.format;
 import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 import static rent.common.util.StringUtil.j;
-import static rent.repo.stationary.user.StaticSessionUserDto.SESSION_USER_DTO;
+import static rent.repo.stationary.user.StaticUserDto.SESSION_USER_DTO;
 import static rent.rest.controller.util.RestAssuredSpec.getSpec;
 
 @SpringApplicationConfiguration(classes = {
