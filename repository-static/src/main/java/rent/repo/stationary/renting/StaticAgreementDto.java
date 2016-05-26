@@ -2,7 +2,7 @@ package rent.repo.stationary.renting;
 
 import rent.repo.api.renting.AgreementDto;
 
-import static rent.repo.stationary.user.StaticUserAuthenticationDto.USER_AUTH_DTO;
+import static rent.repo.stationary.user.StaticSessionUserDto.SESSION_USER_DTO;
 
 public class StaticAgreementDto {
 
@@ -14,7 +14,7 @@ public class StaticAgreementDto {
 
         @Override
         public long getUserId() {
-            return USER_AUTH_DTO.getUserId();
+            return SESSION_USER_DTO.getUserId();
         }
     };
 }

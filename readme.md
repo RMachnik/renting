@@ -35,3 +35,4 @@ You need to have installed following apps to be able to build and run Renting-ba
 * java 1.8
 * maven
 * lombok plugin for Intellij - https://projectlombok.org/features/index.html
+To fully enable lombok support in your IDE please use http://stackoverflow.com/a/14582541/1370062

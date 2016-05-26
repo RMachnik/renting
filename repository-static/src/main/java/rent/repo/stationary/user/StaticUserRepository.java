@@ -1,21 +1,22 @@
 package rent.repo.stationary.user;
 
-import rent.repo.api.user.UserAuthenticationDto;
+import rent.repo.api.user.RegistrationDto;
+import rent.repo.api.user.SessionUserDto;
 import rent.repo.api.user.UserDetailsDto;
 import rent.repo.api.user.UserRepository;
 
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static rent.repo.stationary.user.StaticUserAuthenticationDto.USER_AUTH_DTO;
+import static rent.repo.stationary.user.StaticSessionUserDto.SESSION_USER_DTO;
 
 public class StaticUserRepository implements UserRepository {
 
-    public static final List<UserAuthenticationDto> USERS = newArrayList(USER_AUTH_DTO);
+    public static final List<SessionUserDto> USERS = newArrayList(SESSION_USER_DTO);
 
     @Override
-    public void addUser(UserAuthenticationDto userAuthenticationDto) {
-
+    public long addUser(RegistrationDto registrationDto) {
+        return SESSION_USER_DTO.getUserId();
     }
 
     @Override
@@ -24,7 +25,7 @@ public class StaticUserRepository implements UserRepository {
     }
 
     @Override
-    public UserAuthenticationDto getUserAuthentication(String userName, String password) {
+    public SessionUserDto authenticate(String userName, String password) {
         return USERS.stream()
                 .filter(userDto -> userDto.getUserName().equals(userName) && userDto.getPassword().equals(password))
                 .findFirst()

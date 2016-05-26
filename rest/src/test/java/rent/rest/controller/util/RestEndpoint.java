@@ -9,6 +9,7 @@ public class RestEndpoint {
     public final String invalid;
     public final String login;
     public final String auth;
+    public final String register;
     public final String test;
 
     public RestEndpoint(int port) {
@@ -18,6 +19,7 @@ public class RestEndpoint {
 
         login = "/login";
         auth = "/auth";
+        register = "/register";
         invalid = "/invalid";
         test = "/test";
     }

@@ -12,8 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import rent.common.ValidationException;
 import rent.domain.security.SessionUser;
-import rent.repo.api.user.UserAuthenticationDto;
-import rent.repo.api.user.UserAuthenticationRepository;
+import rent.repo.api.user.AuthRepository;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.fest.assertions.Assertions.assertThat;
@@ -24,59 +23,39 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static rent.repo.stationary.user.StaticSessionUserDto.SESSION_USER_DTO;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AuthenticationProviderImplTest {
 
     static final String PASSWORD = "password";
     static final String USER_NAME = "testUser";
-    private static final UserAuthenticationDto AUTH_1 = new UserAuthenticationDto() {
-        @Override
-        public long getUserId() {
-            return 1;
-        }
-
-        @Override
-        public String getPassword() {
-            return null;
-        }
-
-        @Override
-        public String getUserName() {
-            return null;
-        }
-
-        @Override
-        public String getLastName() {
-            return null;
-        }
-    };
 
     AuthenticationProviderImpl authenticationProvider;
 
     @Mock
-    UserAuthenticationRepository userAuthenticationRepository;
+    AuthRepository authRepository;
 
     @Mock
     Logger logger;
 
     @Before
     public void setUp() {
-        authenticationProvider = new AuthenticationProviderImpl(userAuthenticationRepository, logger);
+        authenticationProvider = new AuthenticationProviderImpl(authRepository, logger);
     }
 
     @Test
     public void simpleConstructor() {
-        AuthenticationProvider authenticationProvider = new AuthenticationProviderImpl(userAuthenticationRepository);
+        AuthenticationProvider authenticationProvider = new AuthenticationProviderImpl(authRepository);
         Authentication authMock = mock(Authentication.class);
         when(authMock.getName()).thenReturn(USER_NAME);
         when(authMock.getCredentials()).thenReturn(PASSWORD);
-        when(userAuthenticationRepository.getUserAuthentication(USER_NAME, PASSWORD)).thenReturn(AUTH_1);
+        when(authRepository.authenticate(USER_NAME, PASSWORD)).thenReturn(SESSION_USER_DTO);
 
         Authentication authenticated = authenticationProvider.authenticate(authMock);
 
         assertThat(authenticated).isNotNull();
-        assertThat(authenticated.getPrincipal()).isEqualTo(new SessionUser(AUTH_1));
+        assertThat(authenticated.getPrincipal()).isEqualTo(new SessionUser(SESSION_USER_DTO));
         assertThat(authenticated.getCredentials()).isEqualTo(AuthenticationProviderImpl.PROTECTED);
     }
 
@@ -85,12 +64,12 @@ public class AuthenticationProviderImplTest {
         Authentication authMock = mock(Authentication.class);
         when(authMock.getName()).thenReturn(USER_NAME);
         when(authMock.getCredentials()).thenReturn(PASSWORD);
-        when(userAuthenticationRepository.getUserAuthentication(USER_NAME, PASSWORD)).thenReturn(AUTH_1);
+        when(authRepository.authenticate(USER_NAME, PASSWORD)).thenReturn(SESSION_USER_DTO);
 
         Authentication authenticated = authenticationProvider.authenticate(authMock);
 
         assertThat(authenticated).isNotNull();
-        assertThat(authenticated.getPrincipal()).isEqualTo(new SessionUser(AUTH_1));
+        assertThat(authenticated.getPrincipal()).isEqualTo(new SessionUser(SESSION_USER_DTO));
         assertThat(authenticated.getCredentials()).isEqualTo(AuthenticationProviderImpl.PROTECTED);
         verify(logger, only()).info(contains("{} is authenticated."), eq(USER_NAME));
     }
@@ -132,7 +111,7 @@ public class AuthenticationProviderImplTest {
         when(authMock.getPrincipal()).thenReturn(EMPTY);
         when(authMock.getName()).thenReturn(USER_NAME);
         when(authMock.getCredentials()).thenReturn(PASSWORD);
-        doThrow(ValidationException.class).when(userAuthenticationRepository).getUserAuthentication(USER_NAME, PASSWORD);
+        doThrow(ValidationException.class).when(authRepository).authenticate(USER_NAME, PASSWORD);
 
         Authentication authenticated = authenticationProvider.authenticate(authMock);
 

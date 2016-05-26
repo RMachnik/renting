@@ -5,11 +5,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import rent.repo.api.user.UserAuthenticationDto;
+import rent.repo.api.user.SessionUserDto;
 import rent.repo.api.user.UserRepository;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static rent.repo.stationary.user.StaticUserAuthenticationDto.USER_AUTH_DTO;
+import static rent.repo.stationary.user.StaticRegistrationDto.REGISTRATION_DTO;
+import static rent.repo.stationary.user.StaticSessionUserDto.SESSION_USER_DTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = {
@@ -23,12 +24,12 @@ public class UserRepoImplTest {
 
     @Test
     public void shouldAddAndGetUser() {
-        userRepository.addUser(USER_AUTH_DTO);
+        userRepository.addUser(REGISTRATION_DTO);
 
-        UserAuthenticationDto userAuthentication = userRepository.getUserAuthentication(USER_AUTH_DTO.getUserName(), USER_AUTH_DTO.getPassword());
+        SessionUserDto userAuthentication = userRepository.authenticate(SESSION_USER_DTO.getUserName(), SESSION_USER_DTO.getPassword());
 
-        assertThat(userAuthentication.getUserName()).isEqualTo(USER_AUTH_DTO.getUserName());
-        assertThat(userAuthentication.getUserId()).isEqualTo(USER_AUTH_DTO.getUserId());
-        assertThat(userAuthentication.getPassword()).isEqualTo(USER_AUTH_DTO.getPassword());
+        assertThat(userAuthentication.getUserName()).isEqualTo(SESSION_USER_DTO.getUserName());
+        assertThat(userAuthentication.getUserId()).isEqualTo(SESSION_USER_DTO.getUserId());
+        assertThat(userAuthentication.getPassword()).isEqualTo(SESSION_USER_DTO.getPassword());
     }
 }

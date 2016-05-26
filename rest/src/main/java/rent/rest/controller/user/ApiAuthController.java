@@ -1,4 +1,4 @@
-package rent.rest.controller;
+package rent.rest.controller.user;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +22,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import static com.google.common.collect.ImmutableMultimap.of;
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.ResponseEntity.badRequest;
+import static org.springframework.http.ResponseEntity.notFound;
 import static org.springframework.http.ResponseEntity.ok;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static rent.common.util.SerializationUtil.fromJson;
 import static rent.common.util.SerializationUtil.toJson;
 
@@ -49,11 +52,11 @@ public class ApiAuthController {
             if (httpRequest.getSession(false) != null) {
                 return ok(toJson(new UserJson(user)));
             } else {
-                return ResponseEntity.notFound().build();
+                return notFound().build();
             }
         } catch (RuntimeException ex) {
             logger.warn("Error while verifying user session.", ex);
-            return new ResponseEntity(toJson(ERROR_MESSAGE), BAD_REQUEST);
+            return badRequest().body(toJson(ERROR_MESSAGE));
         }
     }
 
@@ -71,9 +74,9 @@ public class ApiAuthController {
             }
         } catch (RuntimeException ex) {
             logger.warn("Error during logging user with rq {}.", body, ex);
-            return new ResponseEntity(toJson(ERROR_MESSAGE), BAD_REQUEST);
+            return badRequest().body(toJson(ERROR_MESSAGE));
         }
-        return new ResponseEntity(toJson(ERROR_MESSAGE), BAD_REQUEST);
+        return badRequest().body(toJson(ERROR_MESSAGE));
     }
 
     @ResponseBody
@@ -92,7 +95,7 @@ public class ApiAuthController {
             return ok("");
         } catch (RuntimeException ex) {
             logger.warn("Error while logging out user {}.", currentUser.getUserId(), ex);
-            return new ResponseEntity<>(toJson(ERROR_MESSAGE), BAD_REQUEST);
+            return badRequest().body(toJson(ERROR_MESSAGE));
         }
     }
 

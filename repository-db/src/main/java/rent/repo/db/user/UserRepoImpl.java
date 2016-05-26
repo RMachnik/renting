@@ -1,6 +1,7 @@
 package rent.repo.db.user;
 
-import rent.repo.api.user.UserAuthenticationDto;
+import rent.repo.api.user.RegistrationDto;
+import rent.repo.api.user.SessionUserDto;
 import rent.repo.api.user.UserDetailsDto;
 import rent.repo.api.user.UserRepository;
 
@@ -17,15 +18,16 @@ public class UserRepoImpl implements UserRepository {
     }
 
     @Override
-    public UserAuthenticationDto getUserAuthentication(String userName, String password) {
-        List<UserAuthenticationDto> userDto = userCrudRepository.findByUserName(userName);
+    public SessionUserDto authenticate(String userName, String password) {
+        List<SessionUserDto> userDto = userCrudRepository.findByUserName(userName);
         return getFirst(userDto, null);
     }
 
     @Override
-    public void addUser(UserAuthenticationDto userAuthenticationDto) {
-        UserAuthenticationEntity authDto = new UserAuthenticationEntity(userAuthenticationDto);
-        userCrudRepository.save(authDto);
+    public long addUser(RegistrationDto sessionUserDto) {
+        SessionUserEntity authDto = new SessionUserEntity(sessionUserDto);
+        final SessionUserEntity savedUser = userCrudRepository.save(authDto);
+        return savedUser.getUserId();
     }
 
     @Override

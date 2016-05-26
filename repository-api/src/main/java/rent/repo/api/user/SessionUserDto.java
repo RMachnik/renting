@@ -1,6 +1,6 @@
 package rent.repo.api.user;
 
-public interface UserAuthenticationDto {
+public interface SessionUserDto {
 
     long getUserId();
 
@@ -9,4 +9,6 @@ public interface UserAuthenticationDto {
     String getUserName();
 
     String getLastName();
+
+    String getEmail();
 }

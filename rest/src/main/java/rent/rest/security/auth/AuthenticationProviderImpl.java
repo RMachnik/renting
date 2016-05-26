@@ -9,8 +9,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import rent.domain.security.SessionUser;
-import rent.repo.api.user.UserAuthenticationDto;
-import rent.repo.api.user.UserAuthenticationRepository;
+import rent.repo.api.user.AuthRepository;
+import rent.repo.api.user.SessionUserDto;
 
 import java.util.List;
 
@@ -21,17 +21,17 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
     static final String PROTECTED = "PROTECTED";
     static final List<SimpleGrantedAuthority> USER_ROLES = singletonList(new SimpleGrantedAuthority(UserRole.USER.getRole()));
 
-    private final UserAuthenticationRepository userAuthenticationRepository;
+    private final AuthRepository authRepository;
     private final Logger logger;
 
-    public AuthenticationProviderImpl(UserAuthenticationRepository userAuthenticationRepository) {
+    public AuthenticationProviderImpl(AuthRepository authRepository) {
         this.logger = LoggerFactory.getLogger(AuthenticationProviderImpl.class);
-        this.userAuthenticationRepository = userAuthenticationRepository;
+        this.authRepository = authRepository;
     }
 
-    AuthenticationProviderImpl(UserAuthenticationRepository userAuthenticationRepository, Logger logger) {
+    AuthenticationProviderImpl(AuthRepository authRepository, Logger logger) {
         this.logger = logger;
-        this.userAuthenticationRepository = userAuthenticationRepository;
+        this.authRepository = authRepository;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
             validate(authentication);
             String userName = authentication.getName();
             String password = authentication.getCredentials().toString();
-            UserAuthenticationDto authenticatedUser = userAuthenticationRepository.getUserAuthentication(userName, password);
+            SessionUserDto authenticatedUser = authRepository.authenticate(userName, password);
             if (authenticatedUser != null) {
                 logger.info("{} is authenticated.", userName);
                 return new UsernamePasswordAuthenticationToken(new SessionUser(authenticatedUser), PROTECTED, USER_ROLES);

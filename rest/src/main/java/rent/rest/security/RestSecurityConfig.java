@@ -59,6 +59,7 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
                     .regexMatchers("^/login\\?expired$").permitAll()
                     .regexMatchers("/healthcheck").permitAll()
                     .regexMatchers("/auth").permitAll()
+                    .regexMatchers("/register").permitAll()
                     .anyRequest().hasRole(UserRole.USER.name())
                     .and()
                     .formLogin()
