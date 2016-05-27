@@ -1,4 +1,4 @@
-# Renting-backend app #
+# Renting app #
 This is backend application for renting automation.
 
 Application will be based on java se and spring-boot.
@@ -12,7 +12,7 @@ This is simple java app that can be started from `boot/target` using this comman
 
 Each module should contain `moduleName.properties` to fulfill basics.
 
-All configuration properties can be override in `application.properties`. This file is inside boot jar.
+All configuration properties can be override in `application.properties`. This file is inside or outside boot jar.
 
 ### Modules ###
 
