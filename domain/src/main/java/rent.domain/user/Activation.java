@@ -1,5 +1,6 @@
 package rent.domain.user;
 
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import rent.repo.api.Repositories;
@@ -16,18 +17,32 @@ public class Activation {
     private final long userId;
     private final Email email;
     private final String activationToken;
+    @Getter(AccessLevel.NONE)
     private final ActivationRepository activationRepository;
 
+    /**
+     * Constructor should be used via activation controller, when user clicked on activation link.
+     *
+     * @param activationDto token
+     * @param repositories  repositories
+     */
     public Activation(ActivationDto activationDto, Repositories repositories) {
         this.activationRepository = repositories.getUserActivationRepository();
         this.activationToken = activationDto.getActivationToken();
 
-        final ActivationDetailsDto activationDetailsDto = activationRepository.getActivationDetails(activationToken);
+        final ActivationDetailsDto activationDetailsDto = activationRepository.getActivationDetails(activationDto);
 
         this.userId = activationDetailsDto.getUserId();
         this.email = new Email(activationDetailsDto.getEmail());
     }
 
+    /**
+     * Constructor for creating activation link and sending it to user.
+     *
+     * @param userId       userId
+     * @param email        email
+     * @param repositories repositories
+     */
     public Activation(long userId, String email, Repositories repositories) {
         this.activationRepository = repositories.getUserActivationRepository();
         this.activationToken = UUID.randomUUID().toString();
@@ -36,11 +51,44 @@ public class Activation {
     }
 
     public void activateAcount() {
-        activationRepository.activateAccount(activationToken);
+        activationRepository.activateAccount(() -> activationToken);
     }
 
     public void sendActivationEmail() {
-        activationRepository.sendActivationEmail(email.getAddress(), activationToken);
+        activationRepository.sendActivationEmail(new ActivationDetailsDtoImpl(userId, email.getAddress(), activationToken));
+    }
+
+    static class ActivationDetailsDtoImpl implements ActivationDetailsDto {
+
+        private final long userId;
+        private final String email;
+        private final String token;
+
+        public ActivationDetailsDtoImpl(long userId, String email, String token) {
+            this.userId = userId;
+            this.email = email;
+            this.token = token;
+        }
+
+        @Override
+        public long getId() {
+            return 0;
+        }
+
+        @Override
+        public long getUserId() {
+            return userId;
+        }
+
+        @Override
+        public String getEmail() {
+            return email;
+        }
+
+        @Override
+        public String getActivationToken() {
+            return token;
+        }
     }
 
 }

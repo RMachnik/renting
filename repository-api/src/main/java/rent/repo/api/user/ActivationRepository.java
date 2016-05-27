@@ -2,9 +2,9 @@ package rent.repo.api.user;
 
 public interface ActivationRepository {
 
-    void sendActivationEmail(String email, String token);
+    void sendActivationEmail(ActivationDetailsDto activationDetailsDto);
 
-    void activateAccount(String activationDto);
+    void activateAccount(ActivationDto activationDto);
 
-    ActivationDetailsDto getActivationDetails(String activationToken);
+    ActivationDetailsDto getActivationDetails(ActivationDto activationDto);
 }

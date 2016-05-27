@@ -19,7 +19,7 @@ import static java.lang.String.format;
 import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 import static rent.common.util.StringUtil.j;
-import static rent.repo.stationary.user.StaticUserDto.SESSION_USER_DTO;
+import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
 import static rent.rest.controller.util.RestAssuredSpec.getSpec;
 
 @SpringApplicationConfiguration(classes = {
@@ -53,9 +53,9 @@ public class RegistrationControllerTest {
                 .filter(sessionFilter)
                 .when()
                 .body(format(REGISTRATION_JSON,
-                        SESSION_USER_DTO.getUserName(),
-                        SESSION_USER_DTO.getPassword(),
-                        SESSION_USER_DTO.getEmail())
+                        USER_DTO.getUserName(),
+                        USER_DTO.getPassword(),
+                        USER_DTO.getEmail())
                 )
                 .post(url.register)
                 .then()
@@ -87,8 +87,8 @@ public class RegistrationControllerTest {
                 .filter(sessionFilter)
                 .when()
                 .body(format(REGISTRATION_JSON,
-                        SESSION_USER_DTO.getUserName(),
-                        SESSION_USER_DTO.getPassword(),
+                        USER_DTO.getUserName(),
+                        USER_DTO.getPassword(),
                         "malformedEMAIL")
                 )
                 .post(url.register)

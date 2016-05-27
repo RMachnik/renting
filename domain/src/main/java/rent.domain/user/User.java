@@ -21,6 +21,7 @@ public class User {
     private final String userName;
     private final String password;
     private final Email email;
+    private final boolean active;
 
 
     private final transient UserRepository userRepository;
@@ -30,10 +31,11 @@ public class User {
         this.userRepository = repositories.getUserRepository();
 
         UserDto userDto = userRepository.authenticate(userName, password);
-        this.id = userDto.getUserId();
+        this.id = userDto.getId();
         this.userName = userDto.getUserName();
         this.password = userDto.getPassword();
         this.email = new Email(userDto.getEmail());
+        this.active = userDto.isActive();
     }
 
     //todo this operation should trigger sending activation email
@@ -42,6 +44,7 @@ public class User {
         this.userName = registrationDto.getUserName();
         this.password = registrationDto.getPassword();
         this.email = new Email(registrationDto.getEmail());
+        this.active = false;
 
         this.id = userRepository.addUser(registrationDto);
 

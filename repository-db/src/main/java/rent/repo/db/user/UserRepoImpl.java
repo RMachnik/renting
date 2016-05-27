@@ -27,8 +27,9 @@ public class UserRepoImpl implements UserRepository {
     public long addUser(RegistrationDto sessionUserDto) {
         UserEntity authDto = new UserEntity(sessionUserDto);
         final UserEntity savedUser = userCrudRepo.save(authDto);
-        return savedUser.getUserId();
+        return savedUser.getId();
     }
+
 
     @Override
     public UserDetailsDto getUserDetails() {
@@ -37,6 +38,60 @@ public class UserRepoImpl implements UserRepository {
 
     @Override
     public void activateUser(long userId) {
+        final UserEntity user = userCrudRepo.findOne(userId);
+        user.setActive(true);
+        userCrudRepo.save(user);
+    }
 
+    @Override
+    public UserDto getUser(long id) {
+        final UserEntity userEnt = userCrudRepo.findOne(id);
+        return new UserDtoImpl(userEnt);
+    }
+
+    static class UserDtoImpl implements UserDto {
+
+        private final long id;
+        private final String username;
+        private final String email;
+        private final boolean active;
+
+        UserDtoImpl(UserEntity ent) {
+            id = ent.getId();
+            username = ent.getUserName();
+            email = ent.getEmail();
+            active = ent.isActive();
+
+        }
+
+        @Override
+        public long getId() {
+            return id;
+        }
+
+        @Override
+        public String getPassword() {
+            return "protected";
+        }
+
+        @Override
+        public String getUserName() {
+            return username;
+        }
+
+        @Override
+        public String getLastName() {
+            return null;
+        }
+
+        @Override
+        public String getEmail() {
+            return email;
+        }
+
+        @Override
+        public boolean isActive() {
+            return active;
+        }
     }
 }

@@ -2,6 +2,7 @@ package rent.repo.db.user;
 
 import rent.mail.MailService;
 import rent.repo.api.user.ActivationDetailsDto;
+import rent.repo.api.user.ActivationDto;
 import rent.repo.api.user.ActivationRepository;
 import rent.repo.api.user.UserRepository;
 
@@ -21,21 +22,22 @@ public class ActivationRepo implements ActivationRepository {
     }
 
     @Override
-    public void sendActivationEmail(String email, String token) {
-        mailService.setdEmail(email, token);
+    public void sendActivationEmail(ActivationDetailsDto activationDetailsDto) {
+        mailService.setdEmail(activationDetailsDto.getEmail(), activationDetailsDto.getActivationToken());
     }
 
     @Override
-    public void activateAccount(String activationToken) {
+    public ActivationDetailsDto getActivationDetails(ActivationDto activationDto) {
+        return activationCrudRepo.findActivationByActivationToken(activationDto.getActivationToken());
+    }
+
+    @Override
+    public void activateAccount(ActivationDto activationDto) {
+        final String activationToken = activationDto.getActivationToken();
         final ActivationDetailsDto activationDetailsDto = activationCrudRepo.findActivationByActivationToken(activationToken);
         if (activationToken != null) {
             activationCrudRepo.delete(activationDetailsDto.getId());
         }
         userRepository.activateUser(activationDetailsDto.getUserId());
-    }
-
-    @Override
-    public ActivationDetailsDto getActivationDetails(String activationToken) {
-        return activationCrudRepo.findActivationByActivationToken(activationToken);
     }
 }

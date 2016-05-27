@@ -25,7 +25,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static rent.common.util.StringUtil.j;
 import static rent.repo.stationary.user.StaticRegistrationDto.REGISTRATION_DTO;
-import static rent.repo.stationary.user.StaticUserDto.SESSION_USER_DTO;
+import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
 import static rent.rest.controller.util.RestAssuredSpec.getSpec;
 
 @SpringApplicationConfiguration(classes = {
@@ -86,7 +86,7 @@ public class ApiAuthControllerTest {
                 .spec(getSpec(port))
                 .filter(sessionFilter)
                 .when()
-                .body(format(LOGIN_JSON, SESSION_USER_DTO.getUserName(), SESSION_USER_DTO.getPassword()))
+                .body(format(LOGIN_JSON, USER_DTO.getUserName(), USER_DTO.getPassword()))
                 .post(url.auth)
                 .then()
                 .statusCode(SC_OK)
@@ -109,7 +109,7 @@ public class ApiAuthControllerTest {
         given()
                 .spec(getSpec(port))
                 .when()
-                .body(format(LOGIN_JSON, SESSION_USER_DTO.getUserName(), SESSION_USER_DTO.getPassword()))
+                .body(format(LOGIN_JSON, USER_DTO.getUserName(), USER_DTO.getPassword()))
                 .post(url.auth)
                 .then()
                 .statusCode(SC_OK)
@@ -134,7 +134,7 @@ public class ApiAuthControllerTest {
                 .spec(getSpec(port))
                 .filter(sessionFilter)
                 .when()
-                .body(format(LOGIN_JSON, SESSION_USER_DTO.getUserName(), SESSION_USER_DTO.getPassword() + "124456"))
+                .body(format(LOGIN_JSON, USER_DTO.getUserName(), USER_DTO.getPassword() + "124456"))
                 .post(url.auth)
                 .then()
                 .statusCode(SC_BAD_REQUEST)
@@ -159,7 +159,7 @@ public class ApiAuthControllerTest {
                 .spec(getSpec(port))
                 .filter(sessionFilter)
                 .when()
-                .body(format(LOGIN_JSON, SESSION_USER_DTO.getUserName(), SESSION_USER_DTO.getPassword()))
+                .body(format(LOGIN_JSON, USER_DTO.getUserName(), USER_DTO.getPassword()))
                 .post(url.auth)
                 .then()
                 .statusCode(SC_OK)

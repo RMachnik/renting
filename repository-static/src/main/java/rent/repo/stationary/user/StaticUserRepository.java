@@ -9,25 +9,30 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static rent.repo.stationary.user.StaticUserDto.SESSION_USER_DTO;
+import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
 
 public class StaticUserRepository implements UserRepository {
 
-    public static final List<UserDto> USERS = newArrayList(SESSION_USER_DTO);
+    public static final List<UserDto> USERS = newArrayList(USER_DTO);
 
     @Override
     public long addUser(RegistrationDto registrationDto) {
-        return SESSION_USER_DTO.getUserId();
+        return USER_DTO.getId();
     }
 
     @Override
     public UserDetailsDto getUserDetails() {
-        return null;
+        throw new NotImplementedException();
     }
 
     @Override
     public void activateUser(long userId) {
-        throw new NotImplementedException();
+        //static user is active
+    }
+
+    @Override
+    public UserDto getUser(long id) {
+        return USER_DTO.getId() == id ? USER_DTO : null;
     }
 
     @Override

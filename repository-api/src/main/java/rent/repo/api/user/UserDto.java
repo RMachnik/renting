@@ -2,7 +2,7 @@ package rent.repo.api.user;
 
 public interface UserDto {
 
-    long getUserId();
+    long getId();
 
     String getPassword();
 
@@ -11,4 +11,6 @@ public interface UserDto {
     String getLastName();
 
     String getEmail();
+
+    boolean isActive();
 }

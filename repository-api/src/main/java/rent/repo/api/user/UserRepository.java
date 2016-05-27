@@ -7,4 +7,6 @@ public interface UserRepository extends AuthRepository {
     UserDetailsDto getUserDetails();
 
     void activateUser(long userId);
+
+    UserDto getUser(long id);
 }

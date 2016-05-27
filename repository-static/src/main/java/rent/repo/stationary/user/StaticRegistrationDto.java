@@ -2,19 +2,19 @@ package rent.repo.stationary.user;
 
 import rent.repo.api.user.RegistrationDto;
 
-import static rent.repo.stationary.user.StaticUserDto.SESSION_USER_DTO;
+import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
 
 public class StaticRegistrationDto {
 
     public static final RegistrationDto REGISTRATION_DTO = new RegistrationDto() {
         @Override
         public String getUserName() {
-            return SESSION_USER_DTO.getUserName();
+            return USER_DTO.getUserName();
         }
 
         @Override
         public String getPassword() {
-            return SESSION_USER_DTO.getPassword();
+            return USER_DTO.getPassword();
         }
 
         @Override

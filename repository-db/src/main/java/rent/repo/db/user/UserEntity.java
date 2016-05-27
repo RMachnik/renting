@@ -18,26 +18,29 @@ public class UserEntity implements UserDto {
     private String lastName;
     private String password;
     private String email;
+    private boolean active;
 
     public UserEntity() {
     }
 
     public UserEntity(UserDto userDto) {
-        id = userDto.getUserId();
+        id = userDto.getId();
         userName = userDto.getUserName();
         lastName = userDto.getLastName();
         password = userDto.getPassword();
         email = userDto.getEmail();
+        active = userDto.isActive();
     }
 
     public UserEntity(RegistrationDto registrationDto) {
         userName = registrationDto.getUserName();
         password = registrationDto.getPassword();
         email = registrationDto.getEmail();
+        active = false;
     }
 
     @Override
-    public long getUserId() {
+    public long getId() {
         return id;
     }
 
@@ -59,5 +62,14 @@ public class UserEntity implements UserDto {
     @Override
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

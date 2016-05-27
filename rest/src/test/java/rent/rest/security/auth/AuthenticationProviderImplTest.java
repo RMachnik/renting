@@ -23,7 +23,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static rent.repo.stationary.user.StaticUserDto.SESSION_USER_DTO;
+import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AuthenticationProviderImplTest {
@@ -50,12 +50,12 @@ public class AuthenticationProviderImplTest {
         Authentication authMock = mock(Authentication.class);
         when(authMock.getName()).thenReturn(USER_NAME);
         when(authMock.getCredentials()).thenReturn(PASSWORD);
-        when(authRepository.authenticate(USER_NAME, PASSWORD)).thenReturn(SESSION_USER_DTO);
+        when(authRepository.authenticate(USER_NAME, PASSWORD)).thenReturn(USER_DTO);
 
         Authentication authenticated = authenticationProvider.authenticate(authMock);
 
         assertThat(authenticated).isNotNull();
-        assertThat(authenticated.getPrincipal()).isEqualTo(new SessionUser(SESSION_USER_DTO));
+        assertThat(authenticated.getPrincipal()).isEqualTo(new SessionUser(USER_DTO));
         assertThat(authenticated.getCredentials()).isEqualTo(AuthenticationProviderImpl.PROTECTED);
     }
 
@@ -64,12 +64,12 @@ public class AuthenticationProviderImplTest {
         Authentication authMock = mock(Authentication.class);
         when(authMock.getName()).thenReturn(USER_NAME);
         when(authMock.getCredentials()).thenReturn(PASSWORD);
-        when(authRepository.authenticate(USER_NAME, PASSWORD)).thenReturn(SESSION_USER_DTO);
+        when(authRepository.authenticate(USER_NAME, PASSWORD)).thenReturn(USER_DTO);
 
         Authentication authenticated = authenticationProvider.authenticate(authMock);
 
         assertThat(authenticated).isNotNull();
-        assertThat(authenticated.getPrincipal()).isEqualTo(new SessionUser(SESSION_USER_DTO));
+        assertThat(authenticated.getPrincipal()).isEqualTo(new SessionUser(USER_DTO));
         assertThat(authenticated.getCredentials()).isEqualTo(AuthenticationProviderImpl.PROTECTED);
         verify(logger, only()).info(contains("{} is authenticated."), eq(USER_NAME));
     }

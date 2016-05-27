@@ -4,9 +4,9 @@ import rent.repo.api.user.UserDto;
 
 public class StaticUserDto {
 
-    public static final UserDto SESSION_USER_DTO = new UserDto() {
+    public static final UserDto USER_DTO = new UserDto() {
         @Override
-        public long getUserId() {
+        public long getId() {
             return 1;
         }
 
@@ -28,6 +28,11 @@ public class StaticUserDto {
         @Override
         public String getEmail() {
             return "test@email.com";
+        }
+
+        @Override
+        public boolean isActive() {
+            return true;
         }
     };
 }

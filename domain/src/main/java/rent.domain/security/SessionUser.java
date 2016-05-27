@@ -14,7 +14,7 @@ public class SessionUser implements Serializable {
     private final long userId;
 
     public SessionUser(UserDto userDto) {
-        this.userId = userDto.getUserId();
+        this.userId = userDto.getId();
     }
 
 }
