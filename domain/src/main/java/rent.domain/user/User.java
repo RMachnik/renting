@@ -47,9 +47,9 @@ public class User {
         this.active = false;
 
         this.id = userRepository.addUser(registrationDto);
+        new Activation(id, email.getAddress(), repositories).sendActivationEmail();
 
     }
-
     public UserDetails getUserDetails() {
         if (userDetails.isPresent()) {
             userDetails = of(new UserDetails(userRepository.getUserDetails()));

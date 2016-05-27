@@ -55,7 +55,9 @@ public class Activation {
     }
 
     public void sendActivationEmail() {
-        activationRepository.sendActivationEmail(new ActivationDetailsDtoImpl(userId, email.getAddress(), activationToken));
+        activationRepository.sendActivationEmail(
+                new ActivationDetailsDtoImpl(userId, email.getAddress(), activationToken)
+        );
     }
 
     static class ActivationDetailsDtoImpl implements ActivationDetailsDto {
