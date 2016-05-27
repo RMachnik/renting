@@ -1,4 +1,4 @@
-package rent.rest.controller.user;
+package rent.rest.security.auth;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import rent.domain.security.SessionUser;
+import rent.rest.api.ErrorMessage;
+import rent.rest.api.LoginJsonForm;
+import rent.rest.api.SessionUser;
+import rent.rest.api.UserJson;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -96,41 +98,6 @@ public class ApiAuthController {
         } catch (RuntimeException ex) {
             logger.warn("Error while logging out user {}.", currentUser.getUserId(), ex);
             return badRequest().body(toJson(ERROR_MESSAGE));
-        }
-    }
-
-    static class UserJson {
-
-        private final long userId;
-
-        UserJson(SessionUser user) {
-            this.userId = user.getUserId();
-        }
-    }
-
-    static class ErrorMessage {
-
-        private final String code;
-        private final String message;
-
-        ErrorMessage(String code, String message) {
-            this.code = code;
-            this.message = message;
-        }
-    }
-
-    static class LoginJsonForm {
-
-        private final String username;
-        private final String password;
-
-        LoginJsonForm(String username, String password) {
-            this.username = username;
-            this.password = password;
-        }
-
-        UsernamePasswordAuthenticationToken getAuthentication() {
-            return new UsernamePasswordAuthenticationToken(username, password);
         }
     }
 }

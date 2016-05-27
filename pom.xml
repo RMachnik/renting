@@ -17,6 +17,8 @@
         <module>repository-api</module>
         <module>repository-static</module>
         <module>mail</module>
+        <module>rest-api</module>
+        <module>core</module>
     </modules>
 
     <parent>

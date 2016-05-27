@@ -14,17 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>renting</groupId>
-            <artifactId>rest</artifactId>
-            <version>${parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>renting</groupId>
-            <artifactId>repository-db</artifactId>
-            <version>${parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>renting</groupId>
-            <artifactId>repository-static</artifactId>
+            <artifactId>core</artifactId>
             <version>${parent.version}</version>
         </dependency>
     </dependencies>
@@ -49,10 +39,10 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.7</version>
             </plugin>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 

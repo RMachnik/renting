@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 import rent.mail.MailConfig;
 import rent.mail.MailService;
 import rent.repo.api.Repositories;
@@ -19,6 +20,7 @@ import rent.repo.db.user.UserRepoImpl;
 @ComponentScan
 @Import(MailConfig.class)
 @EnableAutoConfiguration
+@PropertySource("classpath:repo-db.properties")
 public class RepoDbConfig {
 
     @Bean

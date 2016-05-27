@@ -1,4 +1,4 @@
-package rent.repo.api.user;
+package rent.rest.api;
 
 public interface RegistrationDto {
 

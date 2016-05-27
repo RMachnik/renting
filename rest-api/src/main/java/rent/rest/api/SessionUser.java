@@ -1,8 +1,7 @@
-package rent.domain.security;
+package rent.rest.api;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import rent.repo.api.user.UserDto;
 
 import java.io.Serializable;
 
@@ -13,8 +12,7 @@ public class SessionUser implements Serializable {
 
     private final long userId;
 
-    public SessionUser(UserDto userDto) {
-        this.userId = userDto.getId();
+    public SessionUser(long userId) {
+        this.userId = userId;
     }
-
 }

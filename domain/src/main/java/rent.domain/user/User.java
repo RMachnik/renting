@@ -4,9 +4,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import rent.repo.api.Repositories;
-import rent.repo.api.user.RegistrationDto;
 import rent.repo.api.user.UserDto;
 import rent.repo.api.user.UserRepository;
+import rent.rest.api.RegistrationDto;
 
 import java.util.Optional;
 
@@ -38,7 +38,6 @@ public class User {
         this.active = userDto.isActive();
     }
 
-    //todo this operation should trigger sending activation email
     public User(RegistrationDto registrationDto, Repositories repositories) {
         this.userRepository = repositories.getUserRepository();
         this.userName = registrationDto.getUserName();

@@ -1,7 +1,7 @@
 package rent.repo.db.user.entity;
 
-import rent.repo.api.user.RegistrationDto;
 import rent.repo.api.user.UserDto;
+import rent.rest.api.RegistrationDto;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

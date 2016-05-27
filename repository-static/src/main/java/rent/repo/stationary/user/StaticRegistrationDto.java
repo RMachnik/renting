@@ -1,6 +1,7 @@
 package rent.repo.stationary.user;
 
-import rent.repo.api.user.RegistrationDto;
+
+import rent.rest.api.RegistrationDto;
 
 import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
 

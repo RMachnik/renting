@@ -8,15 +8,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import rent.domain.security.SessionUser;
 import rent.repo.api.user.AuthRepository;
 import rent.repo.api.user.UserDto;
+import rent.rest.api.SessionUser;
 
 import java.util.List;
 
 import static java.util.Collections.singletonList;
 
-public class AuthenticationProviderImpl implements AuthenticationProvider {
+public class AuthProviderImpl implements AuthenticationProvider {
 
     static final String PROTECTED = "PROTECTED";
     static final List<SimpleGrantedAuthority> USER_ROLES = singletonList(new SimpleGrantedAuthority(UserRole.USER.getRole()));
@@ -24,12 +24,12 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
     private final AuthRepository authRepository;
     private final Logger logger;
 
-    public AuthenticationProviderImpl(AuthRepository authRepository) {
-        this.logger = LoggerFactory.getLogger(AuthenticationProviderImpl.class);
+    public AuthProviderImpl(AuthRepository authRepository) {
+        this.logger = LoggerFactory.getLogger(AuthProviderImpl.class);
         this.authRepository = authRepository;
     }
 
-    AuthenticationProviderImpl(AuthRepository authRepository, Logger logger) {
+    AuthProviderImpl(AuthRepository authRepository, Logger logger) {
         this.logger = logger;
         this.authRepository = authRepository;
     }
@@ -43,7 +43,7 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
             UserDto authenticatedUser = authRepository.authenticate(userName, password);
             if (authenticatedUser != null) {
                 logger.info("{} is authenticated.", userName);
-                return new UsernamePasswordAuthenticationToken(new SessionUser(authenticatedUser), PROTECTED, USER_ROLES);
+                return new UsernamePasswordAuthenticationToken(new SessionUser(authenticatedUser.getId()), PROTECTED, USER_ROLES);
             } else {
                 logger.info("Unable to authenticate user: {}.", userName);
                 return null;

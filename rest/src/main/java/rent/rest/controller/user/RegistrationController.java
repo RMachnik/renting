@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import rent.domain.user.User;
 import rent.repo.api.Repositories;
-import rent.repo.api.user.RegistrationDto;
+import rent.rest.api.RegistrationDto;
 
 import static org.springframework.http.ResponseEntity.badRequest;
 import static org.springframework.http.ResponseEntity.ok;

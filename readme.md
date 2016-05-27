@@ -16,7 +16,8 @@ All configuration properties can be override in `application.properties`. This f
 
 ### Modules ###
 
-* boot - module that is responsible for setting up all configuration and running app
+* boot - module that is responsible for setting up all boot configuration for running app
+* core - module that is responsible for setting up all all configs and components that are needed for boot
 * common - module for common things like utils, validators
 * domain - module with domain implementation, domain objects should encapsulate all repository calls and do what 
 is needed to create such fully functional object. All objects should be immutable! 
@@ -26,6 +27,7 @@ Domain objects should be created based on interfaces that will sit in repositori
 * repository-db - implementation of repository-api based on spring-data
 * repository-static - static implementation of repositories, mainly for testing domain
 that's why we need such repository-api, all repositories should return some dto implementations.
+* rest-api - interface of rest, this will be usefull for writing automated tests for rests
 * rest - module with all rest endpoints
 
 ### Dependencies ###

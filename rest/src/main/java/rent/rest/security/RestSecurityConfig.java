@@ -16,7 +16,7 @@ import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import rent.repo.api.Repositories;
 import rent.repo.db.RepoDbConfig;
-import rent.rest.security.auth.AuthenticationProviderImpl;
+import rent.rest.security.auth.AuthProviderImpl;
 import rent.rest.security.auth.UserRole;
 
 @Configuration
@@ -41,7 +41,7 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     AuthenticationProvider authenticationProvider() {
-        return new AuthenticationProviderImpl(repositories.getUserRepository());
+        return new AuthProviderImpl(repositories.getUserRepository());
     }
 
     @Override

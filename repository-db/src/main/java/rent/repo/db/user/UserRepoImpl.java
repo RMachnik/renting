@@ -1,10 +1,10 @@
 package rent.repo.db.user;
 
-import rent.repo.api.user.RegistrationDto;
 import rent.repo.api.user.UserDetailsDto;
 import rent.repo.api.user.UserDto;
 import rent.repo.api.user.UserRepository;
 import rent.repo.db.user.entity.UserEntity;
+import rent.rest.api.RegistrationDto;
 
 import java.util.List;
 

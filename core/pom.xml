@@ -9,31 +9,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>domain</artifactId>
+    <artifactId>core</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>renting</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>repository-db</artifactId>
             <version>${parent.version}</version>
         </dependency>
         <dependency>
             <groupId>renting</groupId>
-            <artifactId>repository-api</artifactId>
+            <artifactId>rest</artifactId>
             <version>${parent.version}</version>
         </dependency>
-        <dependency>
-            <groupId>renting</groupId>
-            <artifactId>rest-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>renting</groupId>
-            <artifactId>repository-static</artifactId>
-            <version>${parent.version}</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
 </project>
