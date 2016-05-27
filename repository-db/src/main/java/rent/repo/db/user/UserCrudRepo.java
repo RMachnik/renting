@@ -2,6 +2,7 @@ package rent.repo.db.user;
 
 import org.springframework.data.repository.CrudRepository;
 import rent.repo.api.user.UserDto;
+import rent.repo.db.user.entity.UserEntity;
 
 import java.util.List;
 

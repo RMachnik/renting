@@ -2,6 +2,6 @@ package rent.mail;
 
 public interface MailService {
 
-    void setdEmail(String email, String body);
+    void sendEmail(String email, String body);
 
 }

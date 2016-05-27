@@ -1,4 +1,4 @@
-package rent.repo.db.user;
+package rent.repo.db.user.entity;
 
 import rent.repo.api.user.ActivationDetailsDto;
 import rent.repo.api.user.ActivationDto;
@@ -22,6 +22,9 @@ public class ActivationEntity implements ActivationDto, ActivationDetailsDto {
         this.activationToken = activationDetailsDto.getActivationToken();
         this.userId = activationDetailsDto.getUserId();
         this.email = activationDetailsDto.getEmail();
+    }
+
+    public ActivationEntity() {
     }
 
     @Override

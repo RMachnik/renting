@@ -8,9 +8,12 @@ import rent.repo.api.user.UserRepository;
 public class DbRepositories implements Repositories {
 
     private final UserRepository userRepository;
+    private final ActivationRepository activationRepository;
 
-    public DbRepositories(UserRepository userRepository) {
+    public DbRepositories(UserRepository userRepository,
+                          ActivationRepository activationRepository) {
         this.userRepository = userRepository;
+        this.activationRepository = activationRepository;
     }
 
     @Override
@@ -25,6 +28,6 @@ public class DbRepositories implements Repositories {
 
     @Override
     public ActivationRepository getUserActivationRepository() {
-        return null;
+        return activationRepository;
     }
 }

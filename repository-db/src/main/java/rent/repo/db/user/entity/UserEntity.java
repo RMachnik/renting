@@ -1,4 +1,4 @@
-package rent.repo.db.user;
+package rent.repo.db.user.entity;
 
 import rent.repo.api.user.RegistrationDto;
 import rent.repo.api.user.UserDto;

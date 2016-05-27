@@ -5,6 +5,7 @@ import rent.repo.api.user.ActivationDetailsDto;
 import rent.repo.api.user.ActivationDto;
 import rent.repo.api.user.ActivationRepository;
 import rent.repo.api.user.UserRepository;
+import rent.repo.db.user.entity.ActivationEntity;
 
 public class ActivationRepo implements ActivationRepository {
 
@@ -23,12 +24,8 @@ public class ActivationRepo implements ActivationRepository {
 
     @Override
     public void sendActivationEmail(ActivationDetailsDto activationDetailsDto) {
-        mailService.setdEmail(activationDetailsDto.getEmail(), activationDetailsDto.getActivationToken());
-    }
-
-    @Override
-    public ActivationDetailsDto getActivationDetails(ActivationDto activationDto) {
-        return activationCrudRepo.findActivationByActivationToken(activationDto.getActivationToken());
+        mailService.sendEmail(activationDetailsDto.getEmail(), activationDetailsDto.getActivationToken());
+        activationCrudRepo.save(new ActivationEntity(activationDetailsDto));
     }
 
     @Override
@@ -39,5 +36,10 @@ public class ActivationRepo implements ActivationRepository {
             activationCrudRepo.delete(activationDetailsDto.getId());
         }
         userRepository.activateUser(activationDetailsDto.getUserId());
+    }
+
+    @Override
+    public ActivationDetailsDto getActivationDetails(ActivationDto activationDto) {
+        return activationCrudRepo.findActivationByActivationToken(activationDto.getActivationToken());
     }
 }
