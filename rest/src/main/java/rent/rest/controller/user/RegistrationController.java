@@ -30,7 +30,7 @@ public class RegistrationController {
     public ResponseEntity register(@RequestBody String body) {
         try {
             final RegistrationDto registrationDto = fromJson(body, RegistrationForm.class);
-            User user = new User(registrationDto, repositories);
+            new User(registrationDto, repositories);
         } catch (RuntimeException ex) {
             log.warn("Unable to register user.", ex);
             return badRequest().build();

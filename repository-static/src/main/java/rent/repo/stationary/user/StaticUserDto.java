@@ -2,6 +2,8 @@ package rent.repo.stationary.user;
 
 import rent.repo.api.user.UserDto;
 
+import static rent.repo.stationary.user.StaticEmailDto.EMAIL_DTO;
+
 public class StaticUserDto {
 
     public static final UserDto USER_DTO = new UserDto() {
@@ -27,7 +29,7 @@ public class StaticUserDto {
 
         @Override
         public String getEmail() {
-            return "test@email.com";
+            return EMAIL_DTO;
         }
 
         @Override
