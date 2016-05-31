@@ -12,9 +12,6 @@ import rent.rest.api.RegistrationDto;
 
 import java.util.Optional;
 
-import static java.util.Optional.empty;
-import static java.util.Optional.of;
-
 @Getter
 @ToString
 @EqualsAndHashCode
@@ -26,10 +23,7 @@ public class User {
     private final Email email;
     private final boolean active;
 
-
     private final transient UserRepository userRepository;
-    private Optional<ContactDetails> mainContactDetails = empty();
-    private Optional<InvoiceContactDetails> invoiceContactDetails = empty();
 
     public User(String userName, String password, Repositories repositories) {
         this.userRepository = repositories.getUserRepository();
@@ -55,25 +49,17 @@ public class User {
 
     public void addMainContactDetails(ContactDetailsDto contactDetailsDto) {
         userRepository.addContactDetails(id, contactDetailsDto);
-        mainContactDetails = empty();
-    }
-
-    public ContactDetails getMainContactDetails() {
-        if (!mainContactDetails.isPresent()) {
-            mainContactDetails = of(new ContactDetails(userRepository.getContactDetails(id)));
-        }
-        return mainContactDetails.get();
     }
 
     public void addInvoiceContactDetails(InvoiceContactDetailsDto invoiceContactDetailsDto) {
         userRepository.addInvoiceContactDetails(id, invoiceContactDetailsDto);
-        invoiceContactDetails = empty();
     }
 
-    public InvoiceContactDetails getInvoiceContactDetails() {
-        if (!invoiceContactDetails.isPresent()) {
-            invoiceContactDetails = of(new InvoiceContactDetails(userRepository.getInvoiceContactDetails(id)));
-        }
-        return invoiceContactDetails.get();
+    public Optional<InvoiceContactDetails> getInvoiceContactDetails() {
+        return Optional.ofNullable(userRepository.getInvoiceContactDetails(id)).map(InvoiceContactDetails::new);
+    }
+
+    public Optional<ContactDetails> getMainContactDetails() {
+        return Optional.ofNullable(userRepository.getContactDetails(id)).map(ContactDetails::new);
     }
 }
