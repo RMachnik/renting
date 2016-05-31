@@ -17,8 +17,8 @@ import rent.repo.db.user.*;
 public class RepoDbConfig {
 
     @Bean
-    UserRepository userRepository(UserCrudRepo userCrudRepo, ContactDetailsCrudRepo contactDetailsCrudRepo) {
-        return new UserRepoImpl(userCrudRepo, contactDetailsCrudRepo);
+    UserRepository userRepository(UserCrudRepo userCrudRepo, ContactDetailsCrudRepo contactDetailsCrudRepo, InvoiceContactDetailsCrudRepo invoiceContactDetailsCrudRepo) {
+        return new UserRepoImpl(userCrudRepo, contactDetailsCrudRepo, invoiceContactDetailsCrudRepo);
     }
 
     @Bean

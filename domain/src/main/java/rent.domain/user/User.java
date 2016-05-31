@@ -4,12 +4,15 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import rent.repo.api.Repositories;
+import rent.repo.api.user.ContactDetailsDto;
+import rent.repo.api.user.InvoiceContactDetailsDto;
 import rent.repo.api.user.UserDto;
 import rent.repo.api.user.UserRepository;
 import rent.rest.api.RegistrationDto;
 
 import java.util.Optional;
 
+import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
 @Getter
@@ -25,7 +28,8 @@ public class User {
 
 
     private final transient UserRepository userRepository;
-    private Optional<ContactDetails> userDetails = Optional.empty();
+    private Optional<ContactDetails> mainContactDetails = empty();
+    private Optional<InvoiceContactDetails> invoiceContactDetails = empty();
 
     public User(String userName, String password, Repositories repositories) {
         this.userRepository = repositories.getUserRepository();
@@ -47,12 +51,29 @@ public class User {
 
         this.id = userRepository.addUser(registrationDto);
         new Activation(id, email.getAddress(), repositories).sendActivationEmail();
-
     }
-    public ContactDetails getUserDetails() {
-        if (userDetails.isPresent()) {
-            userDetails = of(new ContactDetails(userRepository.getUserDetails()));
+
+    public void addMainContactDetails(ContactDetailsDto contactDetailsDto) {
+        userRepository.addContactDetails(id, contactDetailsDto);
+        mainContactDetails = empty();
+    }
+
+    public ContactDetails getMainContactDetails() {
+        if (!mainContactDetails.isPresent()) {
+            mainContactDetails = of(new ContactDetails(userRepository.getContactDetails(id)));
         }
-        return userDetails.get();
+        return mainContactDetails.get();
+    }
+
+    public void addInvoiceContactDetails(InvoiceContactDetailsDto invoiceContactDetailsDto) {
+        userRepository.addInvoiceContactDetails(id, invoiceContactDetailsDto);
+        invoiceContactDetails = empty();
+    }
+
+    public InvoiceContactDetails getInvoiceContactDetails() {
+        if (!invoiceContactDetails.isPresent()) {
+            invoiceContactDetails = of(new InvoiceContactDetails(userRepository.getInvoiceContactDetails(id)));
+        }
+        return invoiceContactDetails.get();
     }
 }

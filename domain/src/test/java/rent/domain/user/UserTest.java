@@ -17,5 +17,7 @@ public class UserTest {
         assertThat(user.getEmail()).isEqualTo(new Email(USER_DTO.getEmail()));
         assertThat(user.getPassword()).isEqualTo(USER_DTO.getPassword());
         assertThat(user.isActive()).isEqualTo(USER_DTO.isActive());
+        assertThat(user.getMainContactDetails()).isNotNull();
+        assertThat(user.getInvoiceContactDetails()).isNotNull();
     }
 }
