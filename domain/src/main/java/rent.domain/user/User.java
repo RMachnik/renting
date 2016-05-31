@@ -25,7 +25,7 @@ public class User {
 
 
     private final transient UserRepository userRepository;
-    private Optional<UserDetails> userDetails = Optional.empty();
+    private Optional<ContactDetails> userDetails = Optional.empty();
 
     public User(String userName, String password, Repositories repositories) {
         this.userRepository = repositories.getUserRepository();
@@ -49,9 +49,9 @@ public class User {
         new Activation(id, email.getAddress(), repositories).sendActivationEmail();
 
     }
-    public UserDetails getUserDetails() {
+    public ContactDetails getUserDetails() {
         if (userDetails.isPresent()) {
-            userDetails = of(new UserDetails(userRepository.getUserDetails()));
+            userDetails = of(new ContactDetails(userRepository.getUserDetails()));
         }
         return userDetails.get();
     }

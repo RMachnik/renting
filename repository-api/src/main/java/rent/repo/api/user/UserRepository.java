@@ -6,9 +6,11 @@ public interface UserRepository extends AuthRepository {
 
     long addUser(RegistrationDto registrationDto);
 
-    UserDetailsDto getUserDetails();
+    ContactDetailsDto getUserDetails();
 
     void activateUser(long userId);
 
     UserDto getUser(long id);
+
+    ContactDetailsDto getContactDetails(long userId);
 }

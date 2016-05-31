@@ -1,6 +1,6 @@
 package rent.repo.db.user;
 
-import rent.repo.api.user.UserDetailsDto;
+import rent.repo.api.user.ContactDetailsDto;
 import rent.repo.api.user.UserDto;
 import rent.repo.api.user.UserRepository;
 import rent.repo.db.user.entity.UserEntity;
@@ -13,9 +13,11 @@ import static com.google.common.collect.Iterables.getFirst;
 public class UserRepoImpl implements UserRepository {
 
     private final UserCrudRepo userCrudRepo;
+    private final ContactDetailsCrudRepo contactDetaislCrudRepo;
 
-    public UserRepoImpl(UserCrudRepo userCrudRepo) {
+    public UserRepoImpl(UserCrudRepo userCrudRepo, ContactDetailsCrudRepo contactDetaislCrudRepo) {
         this.userCrudRepo = userCrudRepo;
+        this.contactDetaislCrudRepo = contactDetaislCrudRepo;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class UserRepoImpl implements UserRepository {
 
 
     @Override
-    public UserDetailsDto getUserDetails() {
+    public ContactDetailsDto getUserDetails() {
         return null;
     }
 
@@ -48,6 +50,11 @@ public class UserRepoImpl implements UserRepository {
     public UserDto getUser(long id) {
         final UserEntity userEnt = userCrudRepo.findOne(id);
         return new UserDtoImpl(userEnt);
+    }
+
+    @Override
+    public ContactDetailsDto getContactDetails(long userId) {
+        return contactDetaislCrudRepo.findByUserId(userId);
     }
 
     static class UserDtoImpl implements UserDto {

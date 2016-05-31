@@ -1,20 +1,13 @@
 package rent.repo.db;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import rent.mail.MailConfig;
 import rent.mail.MailService;
 import rent.repo.api.Repositories;
 import rent.repo.api.user.ActivationRepository;
 import rent.repo.api.user.UserRepository;
-import rent.repo.db.user.ActivationCrudRepo;
-import rent.repo.db.user.ActivationRepo;
-import rent.repo.db.user.UserCrudRepo;
-import rent.repo.db.user.UserRepoImpl;
+import rent.repo.db.user.*;
 
 @Configuration
 @ComponentScan
@@ -24,8 +17,8 @@ import rent.repo.db.user.UserRepoImpl;
 public class RepoDbConfig {
 
     @Bean
-    UserRepository userRepository(UserCrudRepo userCrudRepo) {
-        return new UserRepoImpl(userCrudRepo);
+    UserRepository userRepository(UserCrudRepo userCrudRepo, ContactDetailsCrudRepo contactDetailsCrudRepo) {
+        return new UserRepoImpl(userCrudRepo, contactDetailsCrudRepo);
     }
 
     @Bean
