@@ -1,6 +1,5 @@
 package rent.domain.user;
 
-import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import rent.repo.api.Repositories;
@@ -10,6 +9,8 @@ import rent.repo.api.user.ActivationRepository;
 
 import java.util.UUID;
 
+import static lombok.AccessLevel.NONE;
+
 @Getter
 @EqualsAndHashCode
 public class Activation {
@@ -17,7 +18,7 @@ public class Activation {
     private final long userId;
     private final Email email;
     private final String activationToken;
-    @Getter(AccessLevel.NONE)
+    @Getter(NONE)
     private final ActivationRepository activationRepository;
 
     /**

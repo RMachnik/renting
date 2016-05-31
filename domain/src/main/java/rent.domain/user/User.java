@@ -12,25 +12,32 @@ import rent.rest.api.RegistrationDto;
 
 import java.util.Optional;
 
+import static java.util.Optional.empty;
+import static java.util.Optional.ofNullable;
+import static lombok.AccessLevel.NONE;
+
 @Getter
 @ToString
 @EqualsAndHashCode
 public class User {
 
     private final long id;
-    private final String userName;
+    private final String firstName;
+    private final Optional<String> lastName;
     private final String password;
     private final Email email;
     private final boolean active;
 
+    @Getter(NONE)
     private final transient UserRepository userRepository;
 
-    public User(String userName, String password, Repositories repositories) {
+    public User(String firstName, String password, Repositories repositories) {
         this.userRepository = repositories.getUserRepository();
 
-        UserDto userDto = userRepository.authenticate(userName, password);
+        UserDto userDto = userRepository.authenticate(firstName, password);
         this.id = userDto.getId();
-        this.userName = userDto.getUserName();
+        this.firstName = userDto.getFirstName();
+        this.lastName = ofNullable(userDto.getLastName());
         this.password = userDto.getPassword();
         this.email = new Email(userDto.getEmail());
         this.active = userDto.isActive();
@@ -38,7 +45,8 @@ public class User {
 
     public User(RegistrationDto registrationDto, Repositories repositories) {
         this.userRepository = repositories.getUserRepository();
-        this.userName = registrationDto.getUserName();
+        this.firstName = registrationDto.getFirstName();
+        this.lastName = empty();
         this.password = registrationDto.getPassword();
         this.email = new Email(registrationDto.getEmail());
         this.active = false;
@@ -56,10 +64,10 @@ public class User {
     }
 
     public Optional<InvoiceContactDetails> getInvoiceContactDetails() {
-        return Optional.ofNullable(userRepository.getInvoiceContactDetails(id)).map(InvoiceContactDetails::new);
+        return ofNullable(userRepository.getInvoiceContactDetails(id)).map(InvoiceContactDetails::new);
     }
 
     public Optional<ContactDetails> getMainContactDetails() {
-        return Optional.ofNullable(userRepository.getContactDetails(id)).map(ContactDetails::new);
+        return ofNullable(userRepository.getContactDetails(id)).map(ContactDetails::new);
     }
 }

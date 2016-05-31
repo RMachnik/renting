@@ -4,15 +4,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 public class LoginJsonForm {
 
-    private final String username;
+    private final String email;
     private final String password;
 
-    LoginJsonForm(String username, String password) {
-        this.username = username;
+    LoginJsonForm(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
     public UsernamePasswordAuthenticationToken getAuthentication() {
-        return new UsernamePasswordAuthenticationToken(username, password);
+        return new UsernamePasswordAuthenticationToken(email, password);
     }
 }

@@ -50,7 +50,7 @@ public class RegistrationController {
         }
 
         @Override
-        public String getUserName() {
+        public String getFirstName() {
             return username;
         }
 

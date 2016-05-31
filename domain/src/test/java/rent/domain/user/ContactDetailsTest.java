@@ -14,6 +14,6 @@ public class ContactDetailsTest {
         assertThat(contactDetails.getFullName()).isEqualTo(CONTACT_DETAILS_DTO.getFullName());
         assertThat(contactDetails.getIdentification()).isEqualTo(CONTACT_DETAILS_DTO.getIdentification());
         assertThat(contactDetails.getAddress()).isNotNull();
-        assertThat(contactDetails.getPhoneNumber().getNumber()).isEqualTo(CONTACT_DETAILS_DTO.getPhoneNumber());
+        assertThat(contactDetails.getPhone().getNumber()).isEqualTo(CONTACT_DETAILS_DTO.getPhoneNumber());
     }
 }

@@ -6,7 +6,7 @@ public interface UserDto {
 
     String getPassword();
 
-    String getUserName();
+    String getFirstName();
 
     String getLastName();
 

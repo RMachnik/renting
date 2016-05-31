@@ -53,9 +53,9 @@ public class StaticUserRepository implements UserRepository {
     }
 
     @Override
-    public UserDto authenticate(String userName, String password) {
+    public UserDto authenticate(String email, String password) {
         return USERS.stream()
-                .filter(userDto -> userDto.getUserName().equals(userName) && userDto.getPassword().equals(password))
+                .filter(userDto -> userDto.getEmail().equals(email) && userDto.getPassword().equals(password))
                 .findFirst()
                 .get();
     }

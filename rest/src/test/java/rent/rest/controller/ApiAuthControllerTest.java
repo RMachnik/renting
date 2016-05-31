@@ -38,7 +38,7 @@ import static rent.rest.controller.util.RestAssuredSpec.getSpec;
 public class ApiAuthControllerTest {
 
     private static final String LOGIN_JSON = j("{ \n" +
-            "  'username':'%s',\n" +
+            "  'email':'%s',\n" +
             "  'password':'%s'\n" +
             "}");
 
@@ -86,7 +86,7 @@ public class ApiAuthControllerTest {
                 .spec(getSpec(port))
                 .filter(sessionFilter)
                 .when()
-                .body(format(LOGIN_JSON, USER_DTO.getUserName(), USER_DTO.getPassword()))
+                .body(format(LOGIN_JSON, USER_DTO.getEmail(), USER_DTO.getPassword()))
                 .post(url.auth)
                 .then()
                 .statusCode(SC_OK)
@@ -109,7 +109,7 @@ public class ApiAuthControllerTest {
         given()
                 .spec(getSpec(port))
                 .when()
-                .body(format(LOGIN_JSON, USER_DTO.getUserName(), USER_DTO.getPassword()))
+                .body(format(LOGIN_JSON, USER_DTO.getEmail(), USER_DTO.getPassword()))
                 .post(url.auth)
                 .then()
                 .statusCode(SC_OK)
@@ -134,7 +134,7 @@ public class ApiAuthControllerTest {
                 .spec(getSpec(port))
                 .filter(sessionFilter)
                 .when()
-                .body(format(LOGIN_JSON, USER_DTO.getUserName(), USER_DTO.getPassword() + "124456"))
+                .body(format(LOGIN_JSON, USER_DTO.getEmail(), USER_DTO.getPassword() + "124456"))
                 .post(url.auth)
                 .then()
                 .statusCode(SC_BAD_REQUEST)
@@ -159,7 +159,7 @@ public class ApiAuthControllerTest {
                 .spec(getSpec(port))
                 .filter(sessionFilter)
                 .when()
-                .body(format(LOGIN_JSON, USER_DTO.getUserName(), USER_DTO.getPassword()))
+                .body(format(LOGIN_JSON, USER_DTO.getEmail(), USER_DTO.getPassword()))
                 .post(url.auth)
                 .then()
                 .statusCode(SC_OK)

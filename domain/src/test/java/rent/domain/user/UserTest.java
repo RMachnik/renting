@@ -10,10 +10,11 @@ public class UserTest {
 
     @Test
     public void shouldConstructProperUser() {
-        User user = new User(USER_DTO.getUserName(), USER_DTO.getPassword(), new StaticRepositories());
+        User user = new User(USER_DTO.getEmail(), USER_DTO.getPassword(), new StaticRepositories());
 
         assertThat(user.getId()).isEqualTo(USER_DTO.getId());
-        assertThat(user.getUserName()).isEqualTo(USER_DTO.getUserName());
+        assertThat(user.getFirstName()).isEqualTo(USER_DTO.getFirstName());
+        assertThat(user.getLastName().get()).isEqualTo(USER_DTO.getLastName());
         assertThat(user.getEmail()).isEqualTo(new Email(USER_DTO.getEmail()));
         assertThat(user.getPassword()).isEqualTo(USER_DTO.getPassword());
         assertThat(user.isActive()).isEqualTo(USER_DTO.isActive());

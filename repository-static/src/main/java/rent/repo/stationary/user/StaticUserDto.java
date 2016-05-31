@@ -18,8 +18,8 @@ public class StaticUserDto {
         }
 
         @Override
-        public String getUserName() {
-            return "username";
+        public String getFirstName() {
+            return "firstname";
         }
 
         @Override

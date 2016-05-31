@@ -2,7 +2,7 @@ package rent.rest.api;
 
 public interface RegistrationDto {
 
-    String getUserName();
+    String getFirstName();
 
     String getPassword();
 

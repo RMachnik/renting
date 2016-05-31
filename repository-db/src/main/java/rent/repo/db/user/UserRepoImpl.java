@@ -29,8 +29,8 @@ public class UserRepoImpl implements UserRepository {
     }
 
     @Override
-    public UserDto authenticate(String userName, String password) {
-        List<UserDto> userDto = userCrudRepo.findByUserNameAndPassword(userName, password);
+    public UserDto authenticate(String email, String password) {
+        List<UserDto> userDto = userCrudRepo.findByEmailAndPassword(email, password);
         return getFirst(userDto, null);
     }
 
@@ -91,7 +91,7 @@ public class UserRepoImpl implements UserRepository {
 
         UserDtoImpl(UserEntity ent) {
             id = ent.getId();
-            username = ent.getUserName();
+            username = ent.getFirstName();
             email = ent.getEmail();
             active = ent.isActive();
 
@@ -108,7 +108,7 @@ public class UserRepoImpl implements UserRepository {
         }
 
         @Override
-        public String getUserName() {
+        public String getFirstName() {
             return username;
         }
 

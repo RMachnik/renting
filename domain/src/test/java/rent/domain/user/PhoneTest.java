@@ -5,20 +5,20 @@ import org.junit.Test;
 import static org.fest.assertions.Assertions.assertThat;
 import static rent.domain.util.TestUtil.shouldThrowException;
 
-public class PhoneNumberTest {
+public class PhoneTest {
 
     @Test
     public void shouldValidatePhone() {
-        shouldThrowException(() -> new PhoneNumber(""), "phone number");
-        shouldThrowException(() -> new PhoneNumber("123"), "Phone number has invalid format.");
+        shouldThrowException(() -> new Phone(""), "phone number");
+        shouldThrowException(() -> new Phone("123"), "Phone number has invalid format.");
     }
 
     @Test
     public void shouldParsePhone() {
         final String number = "123 456 7890";
 
-        PhoneNumber phoneNumber = new PhoneNumber(number);
+        Phone phone = new Phone(number);
 
-        assertThat(phoneNumber.getNumber()).isEqualTo(number);
+        assertThat(phone.getNumber()).isEqualTo(number);
     }
 }

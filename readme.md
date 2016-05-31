@@ -7,6 +7,7 @@ App can be build using command `mvn package` or `mvn install`.
 
 ### How do I start it? ###
 This is simple java app that can be started from `boot/target` using this command `java -jar boot-${version}.jar`.
+Application starts on http://localhost:8080/
 
 ### Configuration ###
 

@@ -74,7 +74,6 @@ public class BaseController {
         } catch (SocketException ex) {
             throw new RuntimeException(ex);
         }
-
         return ip;
     }
 }

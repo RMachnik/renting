@@ -14,12 +14,12 @@ public class ContactDetails {
     private final String fullName;
     private final Address address;
     private final String identification;
-    private final PhoneNumber phoneNumber;
+    private final Phone phone;
 
     public ContactDetails(ContactDetailsDto contactDetailsDto) {
         this.fullName = contactDetailsDto.getFullName();
         this.address = new Address(contactDetailsDto.getAddress());
         this.identification = contactDetailsDto.getIdentification();
-        this.phoneNumber = new PhoneNumber(contactDetailsDto.getPhoneNumber());
+        this.phone = new Phone(contactDetailsDto.getPhoneNumber());
     }
 }

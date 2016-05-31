@@ -20,8 +20,8 @@
         $(document).ready(function () {
 
             $("#btn-dev").click(function () {
-                $("#username").val("TEST_USER");
-                $("#password").val("pass");
+                $("#username").val("test@email.com");
+                $("#password").val("password");
             });
         });
     </script>
@@ -40,7 +40,7 @@
                     <form class="form-horizontal" th:action="@{/login}" method="post">
                         <fieldset>
                             <div th:if="${param.error}" class="alert alert-danger">
-                                Invalid username and password.
+                                Invalid email and password.
                             </div>
                             <div th:if="${param.expired}" class="alert alert-warning">
                                 Your session has expired.
@@ -53,7 +53,7 @@
 
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="username" name="username"
-                                           placeholder="Username"/>
+                                           placeholder="Email"/>
                                 </div>
                             </div>
                             <div class="form-group">

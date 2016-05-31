@@ -1,6 +1,5 @@
 package rent.rest.security.auth;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -15,6 +14,7 @@ import rent.rest.api.SessionUser;
 import java.util.List;
 
 import static java.util.Collections.singletonList;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class AuthProviderImpl implements AuthenticationProvider {
 
@@ -38,14 +38,14 @@ public class AuthProviderImpl implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         try {
             validate(authentication);
-            String userName = authentication.getName();
+            String email = authentication.getName();
             String password = authentication.getCredentials().toString();
-            UserDto authenticatedUser = authRepository.authenticate(userName, password);
+            UserDto authenticatedUser = authRepository.authenticate(email, password);
             if (authenticatedUser != null) {
-                logger.info("{} is authenticated.", userName);
+                logger.info("{} is authenticated.", email);
                 return new UsernamePasswordAuthenticationToken(new SessionUser(authenticatedUser.getId()), PROTECTED, USER_ROLES);
             } else {
-                logger.info("Unable to authenticate user: {}.", userName);
+                logger.info("Unable to authenticate user: {}.", email);
                 return null;
             }
         } catch (RuntimeException e) {
@@ -59,8 +59,8 @@ public class AuthProviderImpl implements AuthenticationProvider {
     }
 
     private void validate(Authentication authentication) {
-        if (StringUtils.isBlank(authentication.getName()) ||
-                authentication.getCredentials() != null && StringUtils.isBlank(authentication.getCredentials().toString())) {
+        if (isBlank(authentication.getName()) ||
+                authentication.getCredentials() != null && isBlank(authentication.getCredentials().toString())) {
             throw new RuntimeException("Authentication validation failed.");
         }
     }

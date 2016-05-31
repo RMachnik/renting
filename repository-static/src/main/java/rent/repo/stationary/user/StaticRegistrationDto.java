@@ -10,8 +10,8 @@ public class StaticRegistrationDto {
 
     public static final RegistrationDto REGISTRATION_DTO = new RegistrationDto() {
         @Override
-        public String getUserName() {
-            return USER_DTO.getUserName();
+        public String getFirstName() {
+            return USER_DTO.getFirstName();
         }
 
         @Override

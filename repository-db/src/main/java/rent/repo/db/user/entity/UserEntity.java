@@ -14,7 +14,7 @@ public class UserEntity implements UserDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String userName;
+    private String firstName;
     private String lastName;
     private String password;
     private String email;
@@ -25,7 +25,7 @@ public class UserEntity implements UserDto {
 
     public UserEntity(UserDto userDto) {
         id = userDto.getId();
-        userName = userDto.getUserName();
+        firstName = userDto.getFirstName();
         lastName = userDto.getLastName();
         password = userDto.getPassword();
         email = userDto.getEmail();
@@ -33,7 +33,7 @@ public class UserEntity implements UserDto {
     }
 
     public UserEntity(RegistrationDto registrationDto) {
-        userName = registrationDto.getUserName();
+        firstName = registrationDto.getFirstName();
         password = registrationDto.getPassword();
         email = registrationDto.getEmail();
         active = false;
@@ -50,8 +50,8 @@ public class UserEntity implements UserDto {
     }
 
     @Override
-    public String getUserName() {
-        return userName;
+    public String getFirstName() {
+        return firstName;
     }
 
     @Override

@@ -12,7 +12,5 @@ import java.util.List;
  */
 public interface UserCrudRepo extends CrudRepository<UserEntity, Long> {
 
-    List<UserDto> findByUserName(String userName);
-
-    List<UserDto> findByUserNameAndPassword(String name, String userName);
+    List<UserDto> findByEmailAndPassword(String name, String userName);
 }

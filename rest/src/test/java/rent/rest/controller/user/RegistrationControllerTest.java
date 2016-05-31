@@ -53,7 +53,7 @@ public class RegistrationControllerTest {
                 .filter(sessionFilter)
                 .when()
                 .body(format(REGISTRATION_JSON,
-                        USER_DTO.getUserName(),
+                        USER_DTO.getFirstName(),
                         USER_DTO.getPassword(),
                         USER_DTO.getEmail())
                 )
@@ -87,7 +87,7 @@ public class RegistrationControllerTest {
                 .filter(sessionFilter)
                 .when()
                 .body(format(REGISTRATION_JSON,
-                        USER_DTO.getUserName(),
+                        USER_DTO.getFirstName(),
                         USER_DTO.getPassword(),
                         "malformedEMAIL")
                 )

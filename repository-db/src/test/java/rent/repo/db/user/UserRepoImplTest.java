@@ -40,9 +40,9 @@ public class UserRepoImplTest {
 
     @Test
     public void shouldAddAndGetUser() {
-        UserDto userAuthentication = userRepository.authenticate(USER_DTO.getUserName(), USER_DTO.getPassword());
+        UserDto userAuthentication = userRepository.authenticate(USER_DTO.getEmail(), USER_DTO.getPassword());
 
-        assertThat(userAuthentication.getUserName()).isEqualTo(USER_DTO.getUserName());
+        assertThat(userAuthentication.getFirstName()).isEqualTo(USER_DTO.getFirstName());
         assertThat(userAuthentication.getId()).isEqualTo(USER_DTO.getId());
         assertThat(userAuthentication.getPassword()).isEqualTo(USER_DTO.getPassword());
     }
