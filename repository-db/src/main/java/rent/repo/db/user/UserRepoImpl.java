@@ -1,8 +1,11 @@
 package rent.repo.db.user;
 
-import rent.repo.api.user.UserDetailsDto;
+import rent.repo.api.user.ContactDetailsDto;
+import rent.repo.api.user.InvoiceContactDetailsDto;
 import rent.repo.api.user.UserDto;
 import rent.repo.api.user.UserRepository;
+import rent.repo.db.user.entity.ContactDetailsEntity;
+import rent.repo.db.user.entity.InvoiceContactDetailsEntity;
 import rent.repo.db.user.entity.UserEntity;
 import rent.rest.api.RegistrationDto;
 
@@ -13,9 +16,16 @@ import static com.google.common.collect.Iterables.getFirst;
 public class UserRepoImpl implements UserRepository {
 
     private final UserCrudRepo userCrudRepo;
+    private final ContactDetailsCrudRepo contactDetailsCrudRepo;
+    private final InvoiceContactDetailsCrudRepo invoiceContactDetailsCrudRepo;
 
-    public UserRepoImpl(UserCrudRepo userCrudRepo) {
+    public UserRepoImpl(UserCrudRepo userCrudRepo,
+                        ContactDetailsCrudRepo contactDetailsCrudRepo,
+                        InvoiceContactDetailsCrudRepo invoiceContactDetailsCrudRepo
+    ) {
         this.userCrudRepo = userCrudRepo;
+        this.contactDetailsCrudRepo = contactDetailsCrudRepo;
+        this.invoiceContactDetailsCrudRepo = invoiceContactDetailsCrudRepo;
     }
 
     @Override
@@ -31,12 +41,6 @@ public class UserRepoImpl implements UserRepository {
         return savedUser.getId();
     }
 
-
-    @Override
-    public UserDetailsDto getUserDetails() {
-        return null;
-    }
-
     @Override
     public void activateUser(long userId) {
         final UserEntity user = userCrudRepo.findOne(userId);
@@ -48,6 +52,34 @@ public class UserRepoImpl implements UserRepository {
     public UserDto getUser(long id) {
         final UserEntity userEnt = userCrudRepo.findOne(id);
         return new UserDtoImpl(userEnt);
+    }
+
+    @Override
+    public ContactDetailsDto getContactDetails(long userId) {
+        return contactDetailsCrudRepo.findByUserId(userId);
+    }
+
+    @Override
+    public void addContactDetails(long userId, ContactDetailsDto contactDetailsDto) {
+        ContactDetailsDto byUserId = contactDetailsCrudRepo.findByUserId(userId);
+        if (byUserId != null) {
+            contactDetailsCrudRepo.delete((ContactDetailsEntity) byUserId);
+        }
+        contactDetailsCrudRepo.save(new ContactDetailsEntity(userId, contactDetailsDto));
+    }
+
+    @Override
+    public void addInvoiceContactDetails(long userId, InvoiceContactDetailsDto invoiceContactDetailsDto) {
+        InvoiceContactDetailsDto byUserId = invoiceContactDetailsCrudRepo.findByUserId(userId);
+        if (byUserId != null) {
+            invoiceContactDetailsCrudRepo.delete((InvoiceContactDetailsEntity) byUserId);
+        }
+        invoiceContactDetailsCrudRepo.save(new InvoiceContactDetailsEntity(userId, invoiceContactDetailsDto));
+    }
+
+    @Override
+    public InvoiceContactDetailsDto getInvoiceContactDetails(long userId) {
+        return invoiceContactDetailsCrudRepo.findByUserId(userId);
     }
 
     static class UserDtoImpl implements UserDto {

@@ -20,11 +20,11 @@ import static rent.common.util.Validators.nullOrEmpty;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class Phone {
+public class PhoneNumber {
 
     private final String number;
 
-    public Phone(String number) {
+    public PhoneNumber(String number) {
         nullOrEmpty(number, "phone number");
         validatePhoneNumber(number);
         this.number = number;
