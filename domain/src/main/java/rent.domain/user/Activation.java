@@ -51,7 +51,7 @@ public class Activation {
         this.email = new Email(email);
     }
 
-    public void activateAcount() {
+    public void activateAccount() {
         activationRepository.activateAccount(() -> activationToken);
     }
 

@@ -3,6 +3,7 @@ package rent.repo.db;
 import rent.repo.api.Repositories;
 import rent.repo.api.renting.RentingRepository;
 import rent.repo.api.user.ActivationRepository;
+import rent.repo.api.user.NotificationPreferenceRepository;
 import rent.repo.api.user.UserRepository;
 
 public class DbRepositories implements Repositories {
@@ -29,5 +30,10 @@ public class DbRepositories implements Repositories {
     @Override
     public ActivationRepository getUserActivationRepository() {
         return activationRepository;
+    }
+
+    @Override
+    public NotificationPreferenceRepository getNotificationPreferenceRepository() {
+        return null;
     }
 }

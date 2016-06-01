@@ -45,7 +45,7 @@ public class ActivationTest {
     @Test
     public void shouldActivateUser() {
         Activation activation = new Activation(ACTIVATION_DTO, repositories);
-        activation.activateAcount();
+        activation.activateAccount();
 
         verify(activationRepository).activateAccount(ACTIVATION_DTO);
     }
