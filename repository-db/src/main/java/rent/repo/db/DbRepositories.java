@@ -10,11 +10,13 @@ public class DbRepositories implements Repositories {
 
     private final UserRepository userRepository;
     private final ActivationRepository activationRepository;
+    private final NotificationPreferenceRepository notificationPreferenceRepository;
 
     public DbRepositories(UserRepository userRepository,
-                          ActivationRepository activationRepository) {
+                          ActivationRepository activationRepository, NotificationPreferenceRepository notificationPreferenceRepository) {
         this.userRepository = userRepository;
         this.activationRepository = activationRepository;
+        this.notificationPreferenceRepository = notificationPreferenceRepository;
     }
 
     @Override
@@ -34,6 +36,6 @@ public class DbRepositories implements Repositories {
 
     @Override
     public NotificationPreferenceRepository getNotificationPreferenceRepository() {
-        return null;
+        return notificationPreferenceRepository;
     }
 }

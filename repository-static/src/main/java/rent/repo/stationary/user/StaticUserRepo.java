@@ -13,7 +13,7 @@ import static rent.repo.stationary.user.StaticContactDetailsDto.CONTACT_DETAILS_
 import static rent.repo.stationary.user.StaticContactDetailsDto.INVOICE_CONTACT_DETAILS_DTO;
 import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
 
-public class StaticUserRepository implements UserRepository {
+public class StaticUserRepo implements UserRepository {
 
     public static final List<UserDto> USERS = newArrayList(USER_DTO);
 

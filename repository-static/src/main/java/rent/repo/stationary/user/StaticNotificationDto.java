@@ -3,7 +3,9 @@ package rent.repo.stationary.user;
 import rent.repo.api.user.NotificationPreferenceDto;
 
 public class StaticNotificationDto {
-    public static final NotificationPreferenceDto NOTIFICATION_DTO = new NotificationPreferenceDto() {
+    public static final NotificationPreferenceDto NOTIFICATION_DTO = new NotificationPrefImpl();
+
+    private static class NotificationPrefImpl implements NotificationPreferenceDto {
         @Override
         public String getType() {
             return "INVOICE";
@@ -18,5 +20,5 @@ public class StaticNotificationDto {
         public String getTemplate() {
             return "";
         }
-    };
+    }
 }
