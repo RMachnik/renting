@@ -30,6 +30,7 @@ Domain objects should be created based on interfaces that will sit in repositori
 that's why we need such repository-api, all repositories should return some dto implementations.
 * rest-api - interface of rest, this will be usefull for writing automated tests for rests
 * rest - module with all rest endpoints
+* mail - module responsible for sending emails
 
 ### Dependencies ###
 All app dependencies and libs are inside boot jar.

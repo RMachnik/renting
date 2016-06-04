@@ -15,12 +15,12 @@
         <dependency>
             <groupId>renting</groupId>
             <artifactId>common</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>renting</groupId>
             <artifactId>repository-api</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>renting</groupId>
@@ -30,7 +30,7 @@
         <dependency>
             <groupId>renting</groupId>
             <artifactId>repository-static</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
             <scope>test</scope>
         </dependency>
 

@@ -22,7 +22,7 @@ public class Activation {
     private final ActivationRepository activationRepository;
 
     /**
-     * Constructor should be used via activation controller, when user clicked on activation link.
+     * Constructor should be used via activation controller when user has clicked on activation link.
      *
      * @param activationDto token
      * @param repositories  repositories

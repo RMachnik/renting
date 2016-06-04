@@ -15,12 +15,12 @@
         <dependency>
             <groupId>renting</groupId>
             <artifactId>repository-db</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>renting</groupId>
             <artifactId>rest</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

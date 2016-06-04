@@ -30,10 +30,13 @@ public class NotificationPreferencesRepoImplTest {
     NotificationPreferenceRepository notificationsRepo;
 
     @Test
-    public void shouldAddPrefs() {
+    public void shouldAddPrefsAndByDefaultSetToActive() {
         notificationsRepo.initDefaults(USER_DTO.getId(), NOTIFICATION_PREFERENCE_DTOS);
 
         List<NotificationPreferenceDto> all = notificationsRepo.getAll(USER_DTO.getId());
         assertThat(all.size()).isEqualTo(NOTIFICATION_PREFERENCE_DTOS.size());
+        for (NotificationPreferenceDto notificationPreferenceDto : all) {
+            assertThat(notificationPreferenceDto.isActive()).isTrue();
+        }
     }
 }

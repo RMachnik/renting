@@ -27,6 +27,7 @@ public class User {
 
     @Getter(NONE)
     private final transient Repositories repositories;
+
     private long id;
     private String firstName;
     private Optional<String> lastName;
@@ -34,7 +35,6 @@ public class User {
     private Email email;
     private boolean active;
 
-    //todo implement adding default notification preferences
     public User(long id, Repositories repositories) {
         this.repositories = repositories;
 
