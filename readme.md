@@ -40,3 +40,15 @@ You need to have installed following apps to be able to build and run Renting-ba
 * maven
 * lombok plugin for Intellij - https://projectlombok.org/features/index.html
 To fully enable lombok support in your IDE please use http://stackoverflow.com/a/14582541/1370062
+
+### Aruba hosting panel ###
+* https://admin.dc3.arubacloud.pl/Login.aspx
+* credential FPL-54844/vDRlU435#v
+
+### VPS ###
+* server ip:89.36.217.76
+* credential root/qwe_A7asd
+
+### Jenkins ###
+* url: http://89.36.217.76:8080
+* credential root/qwe_A7asd
