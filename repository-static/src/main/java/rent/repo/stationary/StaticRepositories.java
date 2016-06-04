@@ -7,17 +7,18 @@ import rent.repo.api.user.NotificationPreferenceRepository;
 import rent.repo.api.user.UserRepository;
 import rent.repo.stationary.renting.StaticRentingRepo;
 import rent.repo.stationary.user.StaticNotificationPrefRepo;
-import rent.repo.stationary.user.StaticUserRepository;
+import rent.repo.stationary.user.StaticUserRepo;
 
 public class StaticRepositories implements Repositories {
 
-    StaticUserRepository staticUserRepository = new StaticUserRepository();
+    StaticUserRepo staticUserRepo = new StaticUserRepo();
+    StaticActivationRepo staticActivationRepo = new StaticActivationRepo();
     StaticRentingRepo staticRentingRepo = new StaticRentingRepo();
     StaticNotificationPrefRepo staticNotificationRepo = new StaticNotificationPrefRepo();
 
     @Override
     public UserRepository getUserRepository() {
-        return staticUserRepository;
+        return staticUserRepo;
     }
 
     @Override
@@ -27,7 +28,7 @@ public class StaticRepositories implements Repositories {
 
     @Override
     public ActivationRepository getUserActivationRepository() {
-        return null;
+        return staticActivationRepo;
     }
 
     @Override

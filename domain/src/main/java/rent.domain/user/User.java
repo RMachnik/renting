@@ -3,20 +3,21 @@ package rent.domain.user;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import rent.domain.user.notificaton.NotificationType;
 import rent.repo.api.Repositories;
 import rent.repo.api.user.ContactDetailsDto;
 import rent.repo.api.user.InvoiceContactDetailsDto;
+import rent.repo.api.user.NotificationPreferenceDto;
 import rent.repo.api.user.UserDto;
-import rent.repo.api.user.UserRepository;
 import rent.rest.api.RegistrationDto;
 
 import java.util.List;
 import java.util.Optional;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Optional.empty;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Stream.of;
 import static lombok.AccessLevel.NONE;
 
 @Getter
@@ -24,75 +25,97 @@ import static lombok.AccessLevel.NONE;
 @EqualsAndHashCode
 public class User {
 
+    @Getter(NONE)
+    private final transient Repositories repositories;
     private long id;
     private String firstName;
     private Optional<String> lastName;
     private String password;
     private Email email;
     private boolean active;
-    private List<NotificationPreference> notificationPreferences;
-
-    @Getter(NONE)
-    private final transient UserRepository userRepository;
 
     //todo implement adding default notification preferences
     public User(long id, Repositories repositories) {
-        this.userRepository = repositories.getUserRepository();
+        this.repositories = repositories;
 
-        UserDto userDto = userRepository.getUser(id);
-        loadData(repositories, userDto);
+        UserDto userDto = repositories.getUserRepository().getUser(id);
+        initData(userDto);
     }
 
     public User(String firstName, String password, Repositories repositories) {
-        this.userRepository = repositories.getUserRepository();
+        this.repositories = repositories;
 
-        UserDto userDto = userRepository.authenticate(firstName, password);
-        loadData(repositories, userDto);
+        UserDto userDto = repositories.getUserRepository().authenticate(firstName, password);
+        initData(userDto);
     }
 
-    private void loadData(Repositories repositories, UserDto userDto) {
+
+    public User(RegistrationDto registrationDto, Repositories repositories) {
+        this.repositories = repositories;
+
+        this.firstName = registrationDto.getFirstName();
+        this.password = registrationDto.getPassword();
+        this.email = new Email(registrationDto.getEmail());
+        this.id = repositories.getUserRepository().addUser(registrationDto);
+
+        //default params
+        this.lastName = empty();
+        this.active = false;
+        repositories.getNotificationPreferenceRepository().initDefaults(id, getAllTypes());
+
+        new Activation(id, email.getAddress(), repositories).sendActivationEmail();
+    }
+
+    private void initData(UserDto userDto) {
         this.id = userDto.getId();
         this.firstName = userDto.getFirstName();
         this.lastName = ofNullable(userDto.getLastName());
         this.password = userDto.getPassword();
         this.email = new Email(userDto.getEmail());
         this.active = userDto.isActive();
-        this.notificationPreferences = repositories.getNotificationPreferenceRepository().getAll(id)
+    }
+
+    private List<NotificationPreferenceDto> getAllTypes() {
+        return of(NotificationType.values())
+                .map((notificationType) -> new NotificationPreferenceDto() {
+                    @Override
+                    public String getType() {
+                        return notificationType.name();
+                    }
+
+                    @Override
+                    public boolean isActive() {
+                        return false;
+                    }
+
+                    @Override
+                    public String getTemplate() {
+                        return notificationType.getDefaultTemplate();
+                    }
+                })
+                .collect(toList());
+    }
+
+    public List<NotificationPreference> getNotificationPreferences() {
+        return repositories.getNotificationPreferenceRepository().getAll(id)
                 .stream()
                 .map(NotificationPreference::new)
                 .collect(toList());
     }
 
-    public User(RegistrationDto registrationDto, Repositories repositories) {
-        this.userRepository = repositories.getUserRepository();
-        this.firstName = registrationDto.getFirstName();
-        this.lastName = empty();
-        this.password = registrationDto.getPassword();
-        this.email = new Email(registrationDto.getEmail());
-        this.active = false;
-
-        this.id = userRepository.addUser(registrationDto);
-        new Activation(id, email.getAddress(), repositories).sendActivationEmail();
-        this.notificationPreferences = initPreferences(id, repositories);
-    }
-
-    private List<NotificationPreference> initPreferences(long id, Repositories repositories) {
-        return newArrayList();
-    }
-
     public void addMainContactDetails(ContactDetailsDto contactDetailsDto) {
-        userRepository.addContactDetails(id, contactDetailsDto);
+        repositories.getUserRepository().addContactDetails(id, contactDetailsDto);
     }
 
     public void addInvoiceContactDetails(InvoiceContactDetailsDto invoiceContactDetailsDto) {
-        userRepository.addInvoiceContactDetails(id, invoiceContactDetailsDto);
+        repositories.getUserRepository().addInvoiceContactDetails(id, invoiceContactDetailsDto);
     }
 
     public Optional<InvoiceContactDetails> getInvoiceContactDetails() {
-        return ofNullable(userRepository.getInvoiceContactDetails(id)).map(InvoiceContactDetails::new);
+        return ofNullable(repositories.getUserRepository().getInvoiceContactDetails(id)).map(InvoiceContactDetails::new);
     }
 
     public Optional<ContactDetails> getMainContactDetails() {
-        return ofNullable(userRepository.getContactDetails(id)).map(ContactDetails::new);
+        return ofNullable(repositories.getUserRepository().getContactDetails(id)).map(ContactDetails::new);
     }
 }
