@@ -1,1 +1,11 @@
-Sorry, sth went wrong. Please check console logs.
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Error page</title>
+</head>
+<body>
+<p>Sorry, sth went wrong. Please check console logs.</p>
+<span th:text="${status}"/>
+<span th:text="${message}"/>
+</body>
+</html>
