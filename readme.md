@@ -46,14 +46,22 @@ To fully enable lombok support in your IDE please use http://stackoverflow.com/a
 * https://admin.dc3.arubacloud.pl/Login.aspx
 * credential FPL-54844/vDRlU435#v
 
-### VPS ###
-For jenkins:
-* server ip:89.36.217.76
+### VPS servers ###
+
+Jenkins:
+
+* server ip: 89.36.217.76
 * credential root/qwe_A7asd
 
-For email:
+App:
+
 * server ip: 93.186.253.7
 * credential root/rentingApp1
+* app folder: /root/App/running
+* deployment script: /root/App/start.sh
+* app url: 93.186.253.7:8080
+
+To deploy app jenkins is doing scp on app box and putting jar into `/root/App/new` location. Then it is starting `start.sh` command.
 
 ### Jenkins ###
 * url: http://89.36.217.76:8080
