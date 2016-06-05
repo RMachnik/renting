@@ -1,6 +1,6 @@
 package rent.domain.user;
 
-import rent.domain.user.notificaton.NotificationType;
+import rent.domain.user.notification.NotificationType;
 import rent.repo.api.Repositories;
 import rent.repo.api.user.NotificationPreferenceDto;
 

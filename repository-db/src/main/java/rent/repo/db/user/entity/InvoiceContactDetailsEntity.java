@@ -69,27 +69,7 @@ public class InvoiceContactDetailsEntity implements InvoiceContactDetailsDto {
 
     @Override
     public AddressDto getAddress() {
-        return new AddressDto() {
-            @Override
-            public String getAddressLine1() {
-                return addressLine1;
-            }
-
-            @Override
-            public String getAddressLine2() {
-                return addressLine2;
-            }
-
-            @Override
-            public String getPostalCode() {
-                return postalCode;
-            }
-
-            @Override
-            public String getCity() {
-                return city;
-            }
-        };
+        return new AddressDtoImpl(addressLine1, addressLine2, postalCode, city);
     }
 
     @Override
@@ -101,4 +81,5 @@ public class InvoiceContactDetailsEntity implements InvoiceContactDetailsDto {
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
 }

@@ -2,7 +2,7 @@ package rent.domain.user;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import rent.domain.user.notificaton.NotificationType;
+import rent.domain.user.notification.NotificationType;
 import rent.repo.api.user.NotificationPreferenceDto;
 
 @Getter
