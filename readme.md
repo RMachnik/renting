@@ -47,9 +47,15 @@ To fully enable lombok support in your IDE please use http://stackoverflow.com/a
 * credential FPL-54844/vDRlU435#v
 
 ### VPS ###
+For jenkins:
 * server ip:89.36.217.76
 * credential root/qwe_A7asd
+
+For email:
+* server ip: 93.186.253.7
+* credential root/rentingApp1
 
 ### Jenkins ###
 * url: http://89.36.217.76:8080
 * credential root/qwe_A7asd
+

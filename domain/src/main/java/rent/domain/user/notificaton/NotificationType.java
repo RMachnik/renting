@@ -16,4 +16,8 @@ public enum NotificationType {
     public String getDefaultTemplate() {
         return defaultTemplate;
     }
+
+    public String getDescription() {
+        return description;
+    }
 }

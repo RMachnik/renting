@@ -18,7 +18,7 @@ public class StaticNotificationDto {
 
         @Override
         public String getTemplate() {
-            return "";
+            return "Simple template for notification message.";
         }
     }
 }
