@@ -3,11 +3,9 @@ package rent.domain.user;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import rent.domain.user.notificaton.NotificationType;
 import rent.repo.api.Repositories;
 import rent.repo.api.user.ContactDetailsDto;
 import rent.repo.api.user.InvoiceContactDetailsDto;
-import rent.repo.api.user.NotificationPreferenceDto;
 import rent.repo.api.user.UserDto;
 import rent.rest.api.RegistrationDto;
 
@@ -16,8 +14,6 @@ import java.util.Optional;
 
 import static java.util.Optional.empty;
 import static java.util.Optional.ofNullable;
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Stream.of;
 import static lombok.AccessLevel.NONE;
 
 @Getter
@@ -33,6 +29,7 @@ public class User {
     private Optional<String> lastName;
     private String password;
     private Email email;
+    private UserNotifications userNotifications;
     private boolean active;
 
     /**
@@ -49,7 +46,7 @@ public class User {
     }
 
     /**
-     * Constructor that should be used to authenticate user.
+     * Constructor to authenticate user.
      *
      * @param firstName
      * @param password
@@ -63,8 +60,9 @@ public class User {
     }
 
     /**
-     * Constructor that should be used to register user.
+     * Constructor to register user.
      * This constructor initialize default preferences and sends activation email.
+     *
      * @param registrationDto
      * @param repositories
      */
@@ -79,7 +77,8 @@ public class User {
         //default params
         this.lastName = empty();
         this.active = false;
-        repositories.getNotificationPreferenceRepository().initDefaults(id, getAllTypes());
+        this.userNotifications = new UserNotifications(id, repositories);
+        userNotifications.initDefaults();
 
         new Activation(id, email.getAddress(), repositories).sendActivationEmail();
     }
@@ -91,34 +90,11 @@ public class User {
         this.password = userDto.getPassword();
         this.email = new Email(userDto.getEmail());
         this.active = userDto.isActive();
-    }
-
-    private List<NotificationPreferenceDto> getAllTypes() {
-        return of(NotificationType.values())
-                .map((notificationType) -> new NotificationPreferenceDto() {
-                    @Override
-                    public String getType() {
-                        return notificationType.name();
-                    }
-
-                    @Override
-                    public boolean isActive() {
-                        return false;
-                    }
-
-                    @Override
-                    public String getTemplate() {
-                        return notificationType.getDefaultTemplate();
-                    }
-                })
-                .collect(toList());
+        this.userNotifications = new UserNotifications(id, repositories);
     }
 
     public List<NotificationPreference> getNotificationPreferences() {
-        return repositories.getNotificationPreferenceRepository().getAll(id)
-                .stream()
-                .map(NotificationPreference::new)
-                .collect(toList());
+        return userNotifications.getAllPreferences();
     }
 
     public void addMainContactDetails(ContactDetailsDto contactDetailsDto) {
