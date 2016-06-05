@@ -35,6 +35,12 @@ public class User {
     private Email email;
     private boolean active;
 
+    /**
+     * Constructor to get user domain object. Should be invoked in rest when we have currently logged in user with his id.
+     *
+     * @param id
+     * @param repositories
+     */
     public User(long id, Repositories repositories) {
         this.repositories = repositories;
 
@@ -42,6 +48,13 @@ public class User {
         initData(userDto);
     }
 
+    /**
+     * Constructor that should be used to authenticate user.
+     *
+     * @param firstName
+     * @param password
+     * @param repositories
+     */
     public User(String firstName, String password, Repositories repositories) {
         this.repositories = repositories;
 
@@ -49,7 +62,12 @@ public class User {
         initData(userDto);
     }
 
-
+    /**
+     * Constructor that should be used to register user.
+     * This constructor initialize default preferences and sends activation email.
+     * @param registrationDto
+     * @param repositories
+     */
     public User(RegistrationDto registrationDto, Repositories repositories) {
         this.repositories = repositories;
 

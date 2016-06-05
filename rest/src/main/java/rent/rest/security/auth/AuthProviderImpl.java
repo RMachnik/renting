@@ -15,11 +15,12 @@ import java.util.List;
 
 import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static rent.rest.security.auth.UserRole.USER;
 
 public class AuthProviderImpl implements AuthenticationProvider {
 
     static final String PROTECTED = "PROTECTED";
-    static final List<SimpleGrantedAuthority> USER_ROLES = singletonList(new SimpleGrantedAuthority(UserRole.USER.getRole()));
+    static final List<SimpleGrantedAuthority> USER_ROLES = singletonList(new SimpleGrantedAuthority(USER.getRole()));
 
     private final AuthRepository authRepository;
     private final Logger logger;
