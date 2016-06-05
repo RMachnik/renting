@@ -16,7 +16,6 @@ import java.util.Enumeration;
 import java.util.Map;
 
 @Controller
-
 public class BaseController {
 
     @Autowired
