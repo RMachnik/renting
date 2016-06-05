@@ -67,3 +67,7 @@ To deploy app jenkins is doing scp on app box and putting jar into `/root/App/ne
 * url: http://89.36.217.76:8080
 * credential root/qwe_A7asd
 
+### Email ### 
+email: renting.mgr@gmail.com
+pass: rentingApp1
+

@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-
-import static java.lang.String.format;
+import org.springframework.mail.javamail.JavaMailSender;
+import rent.mail.impl.MailServiceImpl;
 
 @Slf4j
 @Configuration
@@ -17,8 +17,8 @@ import static java.lang.String.format;
 public class MailConfig {
 
     @Bean
-    MailService mailService() {
-        return (email, body) -> log.info(format("Email send to: %s, with body: %s.", email, body));
+    MailService mailService(JavaMailSender javaMailSender) {
+        return new MailServiceImpl(javaMailSender);
     }
 
 }
