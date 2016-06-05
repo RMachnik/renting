@@ -7,8 +7,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import rent.repo.api.user.AuthRepository;
-import rent.repo.api.user.UserDto;
+import rent.domain.user.User;
+import rent.repo.api.Repositories;
 import rent.rest.api.SessionUser;
 
 import java.util.List;
@@ -22,17 +22,17 @@ public class AuthProviderImpl implements AuthenticationProvider {
     static final String PROTECTED = "PROTECTED";
     static final List<SimpleGrantedAuthority> USER_ROLES = singletonList(new SimpleGrantedAuthority(USER.getRole()));
 
-    private final AuthRepository authRepository;
+    private final Repositories repositories;
     private final Logger logger;
 
-    public AuthProviderImpl(AuthRepository authRepository) {
+    public AuthProviderImpl(Repositories repositories) {
         this.logger = LoggerFactory.getLogger(AuthProviderImpl.class);
-        this.authRepository = authRepository;
+        this.repositories = repositories;
     }
 
-    AuthProviderImpl(AuthRepository authRepository, Logger logger) {
+    AuthProviderImpl(Repositories repositories, Logger logger) {
         this.logger = logger;
-        this.authRepository = authRepository;
+        this.repositories = repositories;
     }
 
     @Override
@@ -41,15 +41,16 @@ public class AuthProviderImpl implements AuthenticationProvider {
             validate(authentication);
             String email = authentication.getName();
             String password = authentication.getCredentials().toString();
-            UserDto authenticatedUser = authRepository.authenticate(email, password);
-            if (authenticatedUser != null) {
+            User user = new User(email, password, repositories);
+            if (user != null) {
                 logger.info("{} is authenticated.", email);
-                return new UsernamePasswordAuthenticationToken(new SessionUser(authenticatedUser.getId()), PROTECTED, USER_ROLES);
+                return new UsernamePasswordAuthenticationToken(new SessionUser(user.getId()), PROTECTED, USER_ROLES);
             } else {
                 logger.info("Unable to authenticate user: {}.", email);
                 return null;
             }
         } catch (RuntimeException e) {
+            logger.info("Unable to authenticate user {}", authentication.getName());
             return null;
         }
     }

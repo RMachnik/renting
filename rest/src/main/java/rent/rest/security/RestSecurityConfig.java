@@ -41,7 +41,7 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     AuthenticationProvider authenticationProvider() {
-        return new AuthProviderImpl(repositories.getUserRepository());
+        return new AuthProviderImpl(repositories);
     }
 
     @Override
