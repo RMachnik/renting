@@ -14,13 +14,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
 
-public class UserNotificationsTest {
+public class NotificationPreferencesTest {
 
     @Test
     public void shouldConstructNotifications() {
-        UserNotifications userNotifications = new UserNotifications(USER_DTO.getId(), new StaticRepositories());
+        NotificationPreferences notificationPreferences = new NotificationPreferences(USER_DTO.getId(), new StaticRepositories());
 
-        assertThat(userNotifications.getAllPreferences().size()).isEqualTo(1);
+        assertThat(notificationPreferences.getAllPreferences().size()).isEqualTo(1);
     }
 
     @Test
@@ -30,8 +30,8 @@ public class UserNotificationsTest {
         when(repositories.getNotificationPreferenceRepository()).thenReturn(preferenceRepository);
         doNothing().when(preferenceRepository).initDefaults(eq(USER_DTO.getId()), any());
 
-        UserNotifications userNotifications = new UserNotifications(USER_DTO.getId(), repositories);
-        userNotifications.initDefaults();
+        NotificationPreferences notificationPreferences = new NotificationPreferences(USER_DTO.getId(), repositories);
+        notificationPreferences.initDefaults();
 
         verify(preferenceRepository).initDefaults(eq(USER_DTO.getId()), any());
     }

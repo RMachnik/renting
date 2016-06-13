@@ -5,11 +5,15 @@ import lombok.Getter;
 import rent.repo.api.Repositories;
 import rent.repo.api.user.ActivationDetailsDto;
 import rent.repo.api.user.ActivationDto;
-import rent.repo.api.user.ActivationRepository;
+import rent.repo.api.user.UserDto;
 
 import java.util.UUID;
 
 import static lombok.AccessLevel.NONE;
+
+/**
+ * Class responsible for activating account and reseting password.
+ */
 
 @Getter
 @EqualsAndHashCode
@@ -19,7 +23,7 @@ public class Activation {
     private final Email email;
     private final String activationToken;
     @Getter(NONE)
-    private final ActivationRepository activationRepository;
+    private final Repositories repositories;
 
     /**
      * Constructor should be used via activation controller when user has clicked on activation link.
@@ -28,10 +32,12 @@ public class Activation {
      * @param repositories  repositories
      */
     public Activation(ActivationDto activationDto, Repositories repositories) {
-        this.activationRepository = repositories.getUserActivationRepository();
+        this.repositories = repositories;
         this.activationToken = activationDto.getActivationToken();
 
-        final ActivationDetailsDto activationDetailsDto = activationRepository.getActivationDetails(activationDto);
+        final ActivationDetailsDto activationDetailsDto = this.repositories
+                .getUserActivationRepository()
+                .getActivationDetails(activationDto);
 
         this.userId = activationDetailsDto.getUserId();
         this.email = new Email(activationDetailsDto.getEmail());
@@ -45,20 +51,54 @@ public class Activation {
      * @param repositories repositories
      */
     public Activation(long userId, String email, Repositories repositories) {
-        this.activationRepository = repositories.getUserActivationRepository();
+        this.repositories = repositories;
         this.activationToken = UUID.randomUUID().toString();
         this.userId = userId;
         this.email = new Email(email);
     }
 
+    public Activation(String email, Repositories repositories) {
+        this.repositories = repositories;
+        this.activationToken = UUID.randomUUID().toString();
+        this.email = new Email(email);
+
+        final UserDto userDto = repositories.getUserRepository().getByEmail(email);
+        this.userId = userDto.getId();
+
+        if (email.equals(userDto.getEmail())) {
+            this.repositories
+                    .getUserActivationRepository()
+                    .sendActivationEmail(new ActivationDetailsDtoImpl(userId, userDto.getEmail(), activationToken));
+            repositories.getUserRepository().inactivateUser(userId);
+        }
+    }
+
     public void activateAccount() {
-        activationRepository.activateAccount(() -> activationToken);
+        repositories.getUserRepository().activateUser(userId);
+        repositories
+                .getUserActivationRepository()
+                .activateAccount(() -> activationToken);
     }
 
     public void sendActivationEmail() {
-        activationRepository.sendActivationEmail(
-                new ActivationDetailsDtoImpl(userId, email.getAddress(), activationToken)
-        );
+        repositories.getUserRepository().inactivateUser(userId);
+        repositories
+                .getUserActivationRepository()
+                .sendActivationEmail(
+                        new ActivationDetailsDtoImpl(userId, email.getAddress(), activationToken)
+                );
+
+    }
+
+    /**
+     * Sets new password and activate user again.
+     *
+     * @param newPassword
+     */
+    public void setNewPassword(String newPassword) {
+        repositories.getUserRepository().changePassword(userId, newPassword);
+        repositories.getUserRepository().activateUser(userId);
+        repositories.getUserActivationRepository().remove(activationToken);
     }
 
     static class ActivationDetailsDtoImpl implements ActivationDetailsDto {

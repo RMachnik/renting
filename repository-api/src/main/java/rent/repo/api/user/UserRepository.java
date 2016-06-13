@@ -10,6 +10,8 @@ public interface UserRepository extends AuthRepository {
 
     UserDto getUser(long id);
 
+    UserDto getByEmail(String email);
+
     ContactDetailsDto getContactDetails(long userId);
 
     void addContactDetails(long userId, ContactDetailsDto contactDetailsDto);
@@ -17,4 +19,8 @@ public interface UserRepository extends AuthRepository {
     void addInvoiceContactDetails(long userId, InvoiceContactDetailsDto invoiceContactDetailsDto);
 
     InvoiceContactDetailsDto getInvoiceContactDetails(long userId);
+
+    void inactivateUser(long userId);
+
+    void changePassword(long userId, String newPassword);
 }

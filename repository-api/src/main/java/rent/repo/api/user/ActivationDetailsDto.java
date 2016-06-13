@@ -1,6 +1,6 @@
 package rent.repo.api.user;
 
-public interface ActivationDetailsDto {
+public interface ActivationDetailsDto extends ActivationDto {
 
     long getId();
 

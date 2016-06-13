@@ -1,7 +1,6 @@
 package rent.domain.user;
 
 import org.junit.Test;
-import rent.domain.user.notification.NotificationType;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static rent.repo.stationary.user.StaticNotificationDto.NOTIFICATION_DTO;

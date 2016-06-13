@@ -21,4 +21,9 @@ public class StaticActivationRepo implements ActivationRepository {
     public ActivationDetailsDto getActivationDetails(ActivationDto activationDto) {
         return ACTIVATION_DETAILS_DTO;
     }
+
+    @Override
+    public void remove(String activationToken) {
+
+    }
 }

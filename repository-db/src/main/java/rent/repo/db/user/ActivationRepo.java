@@ -4,21 +4,17 @@ import rent.mail.MailService;
 import rent.repo.api.user.ActivationDetailsDto;
 import rent.repo.api.user.ActivationDto;
 import rent.repo.api.user.ActivationRepository;
-import rent.repo.api.user.UserRepository;
 import rent.repo.db.user.entity.ActivationEntity;
 
 public class ActivationRepo implements ActivationRepository {
 
     private final MailService mailService;
     private final ActivationCrudRepo activationCrudRepo;
-    private final UserRepository userRepository;
 
     public ActivationRepo(MailService mailService,
-                          ActivationCrudRepo activationCrudRepo,
-                          UserRepository userRepository) {
+                          ActivationCrudRepo activationCrudRepo) {
         this.mailService = mailService;
         this.activationCrudRepo = activationCrudRepo;
-        this.userRepository = userRepository;
 
     }
 
@@ -35,11 +31,16 @@ public class ActivationRepo implements ActivationRepository {
         if (activationToken != null) {
             activationCrudRepo.delete(activationDetailsDto.getId());
         }
-        userRepository.activateUser(activationDetailsDto.getUserId());
     }
 
     @Override
     public ActivationDetailsDto getActivationDetails(ActivationDto activationDto) {
         return activationCrudRepo.findActivationByActivationToken(activationDto.getActivationToken());
+    }
+
+    @Override
+    public void remove(String activationToken) {
+        final ActivationDetailsDto activationByActivationToken = activationCrudRepo.findActivationByActivationToken(activationToken);
+        activationCrudRepo.delete((ActivationEntity) activationByActivationToken);
     }
 }

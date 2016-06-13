@@ -33,6 +33,14 @@ public class StaticUserRepo implements UserRepository {
     }
 
     @Override
+    public UserDto getByEmail(String email) {
+        return USERS.stream()
+                .filter(userDto -> userDto.getEmail().equals(email))
+                .findFirst()
+                .get();
+    }
+
+    @Override
     public ContactDetailsDto getContactDetails(long userId) {
         return CONTACT_DETAILS_DTO;
     }
@@ -50,6 +58,15 @@ public class StaticUserRepo implements UserRepository {
     @Override
     public InvoiceContactDetailsDto getInvoiceContactDetails(long userId) {
         return INVOICE_CONTACT_DETAILS_DTO;
+    }
+
+    @Override
+    public void inactivateUser(long userId) {
+    }
+
+    @Override
+    public void changePassword(long userId, String newPassword) {
+
     }
 
     @Override

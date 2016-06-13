@@ -72,4 +72,8 @@ public class UserEntity implements UserDto {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

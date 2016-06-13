@@ -19,6 +19,8 @@ import rent.repo.db.RepoDbConfig;
 import rent.rest.security.auth.AuthProviderImpl;
 import rent.rest.security.auth.UserRole;
 
+import static org.springframework.http.HttpMethod.OPTIONS;
+
 @Configuration
 @Import(value = {SpringBootWebSecurityConfiguration.class,
         BootGlobalAuthenticationConfiguration.class,
@@ -61,6 +63,7 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
                     .regexMatchers("/auth").permitAll()
                     .regexMatchers("/register").permitAll()
                     .regexMatchers("/conf").permitAll()
+                    .antMatchers(OPTIONS, "/**").permitAll()
                     .anyRequest().hasRole(UserRole.USER.name())
                     .and()
                     .formLogin()

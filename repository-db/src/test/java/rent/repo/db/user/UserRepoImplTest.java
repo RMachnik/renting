@@ -104,6 +104,26 @@ public class UserRepoImplTest {
         assertThat(contactDetails1.getId()).isNotEqualTo(contactDetails2.getId());
     }
 
+    @Test
+    public void shouldInactivate() {
+        userRepository.inactivateUser(USER_DTO.getId());
+
+        final UserDto user = userRepository.getUser(USER_DTO.getId());
+
+        assertThat(user.isActive()).isFalse();
+    }
+
+    @Test
+    public void shouldChangePassword() {
+        final String newPass = "newPass";
+        userRepository.changePassword(USER_DTO.getId(), newPass);
+
+        final UserDto user = userRepository.getUser(USER_DTO.getId());
+
+        assertThat(user.getPassword()).isEqualTo(newPass);
+    }
+
+
     private void assertContactDetails(ContactDetailsDto contactDetails) {
         assertThat(contactDetails).isNotNull();
         assertThat(contactDetails.getPhoneNumber()).isEqualTo(CONTACT_DETAILS_DTO.getPhoneNumber());

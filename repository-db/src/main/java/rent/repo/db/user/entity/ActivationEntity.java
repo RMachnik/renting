@@ -1,7 +1,6 @@
 package rent.repo.db.user.entity;
 
 import rent.repo.api.user.ActivationDetailsDto;
-import rent.repo.api.user.ActivationDto;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class ActivationEntity implements ActivationDto, ActivationDetailsDto {
+public class ActivationEntity implements ActivationDetailsDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,11 +27,6 @@ public class ActivationEntity implements ActivationDto, ActivationDetailsDto {
     }
 
     @Override
-    public String getActivationToken() {
-        return activationToken;
-    }
-
-    @Override
     public long getId() {
         return id;
     }
@@ -45,6 +39,11 @@ public class ActivationEntity implements ActivationDto, ActivationDetailsDto {
     @Override
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public String getActivationToken() {
+        return activationToken;
     }
 
 }

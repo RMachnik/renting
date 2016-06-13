@@ -1,6 +1,5 @@
 package rent.domain.user;
 
-import rent.domain.user.notification.NotificationType;
 import rent.repo.api.Repositories;
 import rent.repo.api.user.NotificationPreferenceDto;
 
@@ -9,12 +8,12 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
 
-public class UserNotifications {
+public class NotificationPreferences {
 
     private final long userId;
     private final Repositories repositories;
 
-    public UserNotifications(long userId, Repositories repositories) {
+    public NotificationPreferences(long userId, Repositories repositories) {
         this.userId = userId;
         this.repositories = repositories;
     }

@@ -7,4 +7,6 @@ public interface ActivationRepository {
     void activateAccount(ActivationDto activationDto);
 
     ActivationDetailsDto getActivationDetails(ActivationDto activationDto);
+
+    void remove(String activationToken);
 }

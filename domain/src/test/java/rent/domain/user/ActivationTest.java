@@ -10,8 +10,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 import rent.repo.api.Repositories;
 import rent.repo.api.user.ActivationDetailsDto;
 import rent.repo.api.user.ActivationRepository;
+import rent.repo.api.user.UserRepository;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static rent.repo.stationary.user.StaticActivationDto.ACTIVATION_DETAILS_DTO;
@@ -24,12 +26,19 @@ public class ActivationTest {
     @Mock
     ActivationRepository activationRepository;
     @Mock
+    UserRepository userRepository;
+    @Mock
     Repositories repositories;
 
     @Before
     public void setUp() {
         when(repositories.getUserActivationRepository()).thenReturn(activationRepository);
         when(activationRepository.getActivationDetails(ACTIVATION_DTO)).thenReturn(ACTIVATION_DETAILS_DTO);
+        when(repositories.getUserRepository()).thenReturn(userRepository);
+
+        when(userRepository.getByEmail(USER_DTO.getEmail())).thenReturn(USER_DTO);
+        doNothing().when(userRepository).activateUser(USER_DTO.getId());
+        doNothing().when(userRepository).inactivateUser(USER_DTO.getId());
 
     }
 
@@ -48,6 +57,7 @@ public class ActivationTest {
         activation.activateAccount();
 
         verify(activationRepository).activateAccount(ACTIVATION_DTO);
+        verify(userRepository).activateUser(USER_DTO.getId());
     }
 
     @Test
@@ -64,5 +74,25 @@ public class ActivationTest {
                         && activation.getEmail().getAddress().equals(activationDetailsDto.getEmail());
             }
         }));
+        verify(userRepository).inactivateUser(USER_DTO.getId());
+    }
+
+    @Test
+    public void shouldCreateActivationBasedOnEmailForResettingPassword() {
+        Activation activation = new Activation(USER_DTO.getEmail(), repositories);
+
+        assertThat(activation.getEmail().getAddress()).isEqualTo(USER_DTO.getEmail());
+    }
+
+    @Test
+    public void shouldSetNewPassword() {
+        final String newPass = "newPass";
+        Activation activation = new Activation(ACTIVATION_DTO, repositories);
+
+        activation.setNewPassword(newPass);
+
+        verify(userRepository).changePassword(USER_DTO.getId(), newPass);
+        verify(activationRepository).remove(ACTIVATION_DTO.getActivationToken());
+
     }
 }

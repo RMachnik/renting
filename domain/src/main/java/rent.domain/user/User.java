@@ -29,11 +29,11 @@ public class User {
     private Optional<String> lastName;
     private String password;
     private Email email;
-    private UserNotifications userNotifications;
+    private NotificationPreferences notificationPreferences;
     private boolean active;
 
     /**
-     * Constructor to get user domain object. Should be invoked in rest when we have currently logged in user with his id.
+     * Constructor for getting user domain object. Should be invoked in rest when we have currently logged in user with his id.
      *
      * @param id
      * @param repositories
@@ -46,21 +46,21 @@ public class User {
     }
 
     /**
-     * Constructor to authenticate user.
+     * Constructor for authenticating user.
      *
-     * @param firstName
+     * @param email
      * @param password
      * @param repositories
      */
-    public User(String firstName, String password, Repositories repositories) {
+    public User(String email, String password, Repositories repositories) {
         this.repositories = repositories;
 
-        UserDto userDto = repositories.getUserRepository().authenticate(firstName, password);
+        UserDto userDto = repositories.getUserRepository().authenticate(email, password);
         initData(userDto);
     }
 
     /**
-     * Constructor to register user.
+     * Constructor for registering user.
      * This constructor initialize default preferences and sends activation email.
      *
      * @param registrationDto
@@ -77,8 +77,8 @@ public class User {
         //default params
         this.lastName = empty();
         this.active = false;
-        this.userNotifications = new UserNotifications(id, repositories);
-        userNotifications.initDefaults();
+        this.notificationPreferences = new NotificationPreferences(id, repositories);
+        notificationPreferences.initDefaults();
 
         new Activation(id, email.getAddress(), repositories).sendActivationEmail();
     }
@@ -90,11 +90,11 @@ public class User {
         this.password = userDto.getPassword();
         this.email = new Email(userDto.getEmail());
         this.active = userDto.isActive();
-        this.userNotifications = new UserNotifications(id, repositories);
+        this.notificationPreferences = new NotificationPreferences(id, repositories);
     }
 
     public List<NotificationPreference> getNotificationPreferences() {
-        return userNotifications.getAllPreferences();
+        return notificationPreferences.getAllPreferences();
     }
 
     public void addMainContactDetails(ContactDetailsDto contactDetailsDto) {

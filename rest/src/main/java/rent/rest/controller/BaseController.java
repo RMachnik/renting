@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.EnumerablePropertySource;
 import org.springframework.core.env.PropertySource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -15,11 +17,22 @@ import java.net.SocketException;
 import java.util.Enumeration;
 import java.util.Map;
 
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.web.bind.annotation.RequestMethod.OPTIONS;
+
 @Controller
 public class BaseController {
 
     @Autowired
     ConfigurableEnvironment env;
+
+    //endpoint for allowing browser to ask for options when ajax call is requested
+    @RequestMapping(method = OPTIONS, value = "/*")
+    @ResponseBody
+    public ResponseEntity handlePreflight() {
+        return new ResponseEntity(NO_CONTENT);
+    }
+
 
     @RequestMapping("/login")
     String login(Model model) {

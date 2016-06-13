@@ -55,6 +55,11 @@ public class UserRepoImpl implements UserRepository {
     }
 
     @Override
+    public UserDto getByEmail(String email) {
+        return userCrudRepo.findByEmail(email);
+    }
+
+    @Override
     public ContactDetailsDto getContactDetails(long userId) {
         return contactDetailsCrudRepo.findByUserId(userId);
     }
@@ -65,7 +70,8 @@ public class UserRepoImpl implements UserRepository {
         if (byUserId != null) {
             contactDetailsCrudRepo.delete((ContactDetailsEntity) byUserId);
         }
-        contactDetailsCrudRepo.save(new ContactDetailsEntity(userId, contactDetailsDto));
+        final ContactDetailsEntity contactDetailsEntity = new ContactDetailsEntity(userId, contactDetailsDto);
+        contactDetailsCrudRepo.save(contactDetailsEntity);
     }
 
     @Override
@@ -82,19 +88,34 @@ public class UserRepoImpl implements UserRepository {
         return invoiceContactDetailsCrudRepo.findByUserId(userId);
     }
 
+    @Override
+    public void inactivateUser(long userId) {
+        final UserEntity userToBeInactivate = userCrudRepo.findOne(userId);
+        userToBeInactivate.setActive(false);
+        userCrudRepo.save(userToBeInactivate);
+    }
+
+    @Override
+    public void changePassword(long userId, String newPassword) {
+        final UserEntity userToBeInactivate = userCrudRepo.findOne(userId);
+        userToBeInactivate.setPassword(newPassword);
+        userCrudRepo.save(userToBeInactivate);
+    }
+
     static class UserDtoImpl implements UserDto {
 
         private final long id;
         private final String username;
         private final String email;
         private final boolean active;
+        private String password;
 
         UserDtoImpl(UserEntity ent) {
             id = ent.getId();
             username = ent.getFirstName();
             email = ent.getEmail();
             active = ent.isActive();
-
+            password = ent.getPassword();
         }
 
         @Override
@@ -104,7 +125,7 @@ public class UserRepoImpl implements UserRepository {
 
         @Override
         public String getPassword() {
-            return "protected";
+            return password;
         }
 
         @Override
