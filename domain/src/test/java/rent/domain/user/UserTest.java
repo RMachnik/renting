@@ -27,7 +27,7 @@ import static rent.repo.stationary.user.StaticContactDetailsDto.CONTACT_DETAILS_
 import static rent.repo.stationary.user.StaticContactDetailsDto.INVOICE_CONTACT_DETAILS_DTO;
 import static rent.repo.stationary.user.StaticNotificationPrefRepo.NOTIFICATION_PREFERENCE_DTOS;
 import static rent.repo.stationary.user.StaticRegistrationDto.REGISTRATION_DTO;
-import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
+import static rent.repo.stationary.user.StaticUserRepo.USER_DTO;
 
 public class UserTest {
 

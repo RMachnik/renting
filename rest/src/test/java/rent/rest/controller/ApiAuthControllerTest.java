@@ -25,7 +25,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static rent.common.util.StringUtil.j;
 import static rent.repo.stationary.user.StaticRegistrationDto.REGISTRATION_DTO;
-import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
+import static rent.repo.stationary.user.StaticUserRepo.USER_DTO;
 import static rent.rest.controller.util.RestAssuredSpec.getSpec;
 
 @SpringApplicationConfiguration(classes = {

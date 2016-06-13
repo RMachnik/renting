@@ -4,7 +4,7 @@ package rent.repo.stationary.user;
 import rent.rest.api.RegistrationDto;
 
 import static rent.repo.stationary.user.StaticEmailDto.EMAIL_DTO;
-import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
+import static rent.repo.stationary.user.StaticUserRepo.USER_DTO;
 
 public class StaticRegistrationDto {
 

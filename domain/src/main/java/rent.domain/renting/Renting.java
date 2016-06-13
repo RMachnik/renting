@@ -10,13 +10,17 @@ public class Renting {
     private final long userId;
     private final transient Repositories repositories;
 
-    public Renting(int userId, Repositories repositories) {
+    public Renting(long userId, Repositories repositories) {
         this.repositories = repositories;
         this.userId = userId;
     }
 
-    List<Agreement> getRentingAgreement(){
-        return repositories.getRentingRepository().getAgreements(userId).stream().map(agreementDto -> new Agreement(agreementDto)).collect(toList());
+    List<Agreement> getRentingAgreement() {
+        return repositories.getRentingRepository()
+                .getAgreements(userId)
+                .stream()
+                .map(agreementDto -> new Agreement(agreementDto))
+                .collect(toList());
     }
 
 }

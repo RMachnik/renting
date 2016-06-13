@@ -20,7 +20,7 @@ import static org.fest.assertions.Assertions.assertThat;
 import static rent.repo.stationary.user.StaticContactDetailsDto.CONTACT_DETAILS_DTO;
 import static rent.repo.stationary.user.StaticContactDetailsDto.INVOICE_CONTACT_DETAILS_DTO;
 import static rent.repo.stationary.user.StaticRegistrationDto.REGISTRATION_DTO;
-import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
+import static rent.repo.stationary.user.StaticUserRepo.USER_DTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = {

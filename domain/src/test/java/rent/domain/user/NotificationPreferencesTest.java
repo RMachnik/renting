@@ -12,7 +12,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
+import static rent.repo.stationary.user.StaticUserRepo.USER_DTO;
 
 public class NotificationPreferencesTest {
 

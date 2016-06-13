@@ -11,10 +11,41 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 import static rent.repo.stationary.user.StaticContactDetailsDto.CONTACT_DETAILS_DTO;
 import static rent.repo.stationary.user.StaticContactDetailsDto.INVOICE_CONTACT_DETAILS_DTO;
-import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
+import static rent.repo.stationary.user.StaticEmailDto.EMAIL_DTO;
 
 public class StaticUserRepo implements UserRepository {
 
+    public static final UserDto USER_DTO = new UserDto() {
+        @Override
+        public long getId() {
+            return 1;
+        }
+
+        @Override
+        public String getPassword() {
+            return "password";
+        }
+
+        @Override
+        public String getFirstName() {
+            return "firstname";
+        }
+
+        @Override
+        public String getLastName() {
+            return "lastname";
+        }
+
+        @Override
+        public String getEmail() {
+            return EMAIL_DTO;
+        }
+
+        @Override
+        public boolean isActive() {
+            return true;
+        }
+    };
     public static final List<UserDto> USERS = newArrayList(USER_DTO);
 
     @Override

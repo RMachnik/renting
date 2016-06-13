@@ -25,7 +25,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static rent.common.util.StringUtil.j;
-import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
+import static rent.repo.stationary.user.StaticUserRepo.USER_DTO;
 import static rent.rest.controller.util.RestAssuredSpec.getSpec;
 
 @SpringApplicationConfiguration(classes = {

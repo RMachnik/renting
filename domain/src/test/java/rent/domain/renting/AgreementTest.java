@@ -3,7 +3,7 @@ package rent.domain.renting;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static rent.repo.stationary.renting.StaticAgreementDto.AGREEMNET_DTO;
+import static rent.repo.stationary.renting.StaticRentingRepo.AGREEMNET_DTO;
 
 public class AgreementTest {
 

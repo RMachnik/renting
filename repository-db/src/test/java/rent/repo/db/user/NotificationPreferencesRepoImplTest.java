@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static rent.repo.stationary.user.StaticNotificationPrefRepo.NOTIFICATION_PREFERENCE_DTOS;
-import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
+import static rent.repo.stationary.user.StaticUserRepo.USER_DTO;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -93,7 +93,7 @@ public class Activation {
     /**
      * Sets new password and activate user again.
      *
-     * @param newPassword
+     * @param newPassword new password
      */
     public void setNewPassword(String newPassword) {
         repositories.getUserRepository().changePassword(userId, newPassword);

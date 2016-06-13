@@ -18,7 +18,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static rent.repo.stationary.user.StaticActivationDto.ACTIVATION_DETAILS_DTO;
 import static rent.repo.stationary.user.StaticActivationDto.ACTIVATION_DTO;
-import static rent.repo.stationary.user.StaticUserDto.USER_DTO;
+import static rent.repo.stationary.user.StaticUserRepo.USER_DTO;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ActivationTest {
