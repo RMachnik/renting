@@ -1,5 +1,6 @@
 package rent.rest.security.auth;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import static com.google.common.collect.ImmutableMultimap.of;
+import static java.lang.String.format;
 import static org.springframework.http.ResponseEntity.badRequest;
 import static org.springframework.http.ResponseEntity.notFound;
 import static org.springframework.http.ResponseEntity.ok;
@@ -31,9 +33,11 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static rent.common.util.RestUtil.perform;
 import static rent.common.util.SerializationUtil.fromJson;
 import static rent.common.util.SerializationUtil.toJson;
 
+@Slf4j
 @RestController
 @RequestMapping("/auth")
 public class ApiAuthController {
@@ -65,39 +69,36 @@ public class ApiAuthController {
     @ResponseBody
     @RequestMapping(method = POST, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity login(@RequestBody String body) {
-        try {
+        return perform(() -> {
             final LoginJsonForm loginJsonForm = fromJson(body, LoginJsonForm.class);
             final Authentication authenticated = authenticationProvider.authenticate(loginJsonForm.getAuthentication());
             if (authenticated != null && authenticated.isAuthenticated()) {
                 SecurityContextHolder.getContext().setAuthentication(authenticated);
                 applicationEventPublisher.publishEvent(new AuthenticationSuccessEvent(authenticated));
                 final SessionUser sessionUser = (SessionUser) authenticated.getPrincipal();
-                return ok(toJson(of("userId", sessionUser.getUserId())));
+                return of("userId", sessionUser.getUserId());
+            } else {
+                throw new RuntimeException(format("Unable to login with rq: %s.", body));
             }
-        } catch (RuntimeException ex) {
-            logger.warn("Error during logging user with rq {}.", body, ex);
-            return badRequest().body(toJson(ERROR_MESSAGE));
-        }
-        return badRequest().body(toJson(ERROR_MESSAGE));
+        }, ERROR_MESSAGE, log);
     }
 
     @ResponseBody
     @RequestMapping(method = DELETE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity logout(@AuthenticationPrincipal SessionUser currentUser, HttpServletRequest httpRequest) {
-        try {
-            final HttpSession session = httpRequest.getSession(false);
-            if (session != null) {
-                session.invalidate();
-            }
+        return perform(() ->
+                {
+                    final HttpSession session = httpRequest.getSession(false);
+                    if (session != null) {
+                        session.invalidate();
+                    }
 
-            SecurityContext context = SecurityContextHolder.getContext();
-            context.setAuthentication(null);
-            SecurityContextHolder.clearContext();
-
-            return ok("");
-        } catch (RuntimeException ex) {
-            logger.warn("Error while logging out user {}.", currentUser.getUserId(), ex);
-            return badRequest().body(toJson(ERROR_MESSAGE));
-        }
+                    SecurityContext context = SecurityContextHolder.getContext();
+                    context.setAuthentication(null);
+                    SecurityContextHolder.clearContext();
+                    return "";
+                },
+                ERROR_MESSAGE,
+                log);
     }
 }

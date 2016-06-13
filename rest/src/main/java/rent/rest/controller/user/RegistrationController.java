@@ -11,10 +11,9 @@ import rent.domain.user.User;
 import rent.repo.api.Repositories;
 import rent.rest.api.RegistrationDto;
 
-import static org.springframework.http.ResponseEntity.badRequest;
-import static org.springframework.http.ResponseEntity.ok;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static rent.common.util.RestUtil.perform;
 import static rent.common.util.SerializationUtil.fromJson;
 
 @Slf4j
@@ -28,14 +27,13 @@ public class RegistrationController {
     @ResponseBody
     @RequestMapping(method = POST, produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity register(@RequestBody String body) {
-        try {
-            final RegistrationDto registrationDto = fromJson(body, RegistrationForm.class);
-            new User(registrationDto, repositories);
-        } catch (RuntimeException ex) {
-            log.warn("Unable to register user.", ex);
-            return badRequest().build();
-        }
-        return ok("OK");
+        return perform(() -> {
+                    final RegistrationDto registrationDto = fromJson(body, RegistrationForm.class);
+                    new User(registrationDto, repositories);
+                    return "OK";
+                },
+                "Unable to register.",
+                log);
     }
 
     static class RegistrationForm implements RegistrationDto {
