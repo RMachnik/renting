@@ -1,4 +1,4 @@
-package rent.domain.user;
+package rent.domain.user.notification;
 
 public enum NotificationType {
     PAYMENT("Notification about payment day.", "Hi there, payment is coming."),

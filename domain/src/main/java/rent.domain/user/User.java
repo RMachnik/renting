@@ -3,6 +3,8 @@ package rent.domain.user;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import rent.domain.user.notification.NotificationPreference;
+import rent.domain.user.notification.NotificationPreferences;
 import rent.repo.api.Repositories;
 import rent.repo.api.user.ContactDetailsDto;
 import rent.repo.api.user.InvoiceContactDetailsDto;

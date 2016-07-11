@@ -1,4 +1,4 @@
-package rent.domain.user;
+package rent.domain.user.notification;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

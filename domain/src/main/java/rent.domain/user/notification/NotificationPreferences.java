@@ -1,4 +1,4 @@
-package rent.domain.user;
+package rent.domain.user.notification;
 
 import rent.repo.api.Repositories;
 import rent.repo.api.user.NotificationPreferenceDto;

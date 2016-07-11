@@ -1,6 +1,7 @@
 package rent.domain.user;
 
 import org.junit.Test;
+import rent.domain.user.notification.NotificationPreferences;
 import rent.repo.api.Repositories;
 import rent.repo.api.user.NotificationPreferenceRepository;
 import rent.repo.stationary.StaticRepositories;

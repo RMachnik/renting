@@ -3,6 +3,7 @@ package rent.domain.user;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatcher;
+import rent.domain.user.notification.NotificationType;
 import rent.repo.api.Repositories;
 import rent.repo.api.user.ActivationRepository;
 import rent.repo.api.user.NotificationPreferenceDto;
