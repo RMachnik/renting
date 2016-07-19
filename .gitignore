@@ -105,4 +105,5 @@ local.properties
 .texlipse
 
 *.log
+*./target/*
 
