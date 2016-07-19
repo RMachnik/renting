@@ -1,0 +1,10 @@
+rent/rest/security/auth/UserRole.class
+rent/rest/security/auth/ApiAuthController.class
+rent/rest/controller/user/RegistrationController.class
+rent/rest/controller/user/ActivationController.class
+rent/rest/security/RestSecurityConfig.class
+rent/rest/controller/BaseController.class
+rent/rest/security/AllowedOriginsConfig.class
+rent/rest/security/auth/AuthProviderImpl.class
+rent/rest/controller/user/RegistrationController$RegistrationForm.class
+rent/rest/RestConfig.class

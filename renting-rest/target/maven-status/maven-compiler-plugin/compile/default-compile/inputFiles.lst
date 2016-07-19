@@ -1,0 +1,9 @@
+/Users/rmachnik/Dev/Sources/renting-backend/renting-rest/src/main/java/rent/rest/security/auth/UserRole.java
+/Users/rmachnik/Dev/Sources/renting-backend/renting-rest/src/main/java/rent/rest/controller/BaseController.java
+/Users/rmachnik/Dev/Sources/renting-backend/renting-rest/src/main/java/rent/rest/security/RestSecurityConfig.java
+/Users/rmachnik/Dev/Sources/renting-backend/renting-rest/src/main/java/rent/rest/RestConfig.java
+/Users/rmachnik/Dev/Sources/renting-backend/renting-rest/src/main/java/rent/rest/security/auth/AuthProviderImpl.java
+/Users/rmachnik/Dev/Sources/renting-backend/renting-rest/src/main/java/rent/rest/controller/user/RegistrationController.java
+/Users/rmachnik/Dev/Sources/renting-backend/renting-rest/src/main/java/rent/rest/security/auth/ApiAuthController.java
+/Users/rmachnik/Dev/Sources/renting-backend/renting-rest/src/main/java/rent/rest/security/AllowedOriginsConfig.java
+/Users/rmachnik/Dev/Sources/renting-backend/renting-rest/src/main/java/rent/rest/controller/user/ActivationController.java

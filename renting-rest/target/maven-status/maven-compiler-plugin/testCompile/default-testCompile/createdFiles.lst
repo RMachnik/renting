@@ -1,0 +1,9 @@
+rent/rest/controller/TestConfig.class
+rent/rest/controller/user/RegistrationControllerTest.class
+rent/rest/controller/ApiAuthControllerTest.class
+rent/rest/controller/user/ActivationControllerTest.class
+rent/rest/controller/util/RestCredentials$1.class
+rent/rest/security/auth/AuthProviderImplTest.class
+rent/rest/controller/util/RestAssuredSpec.class
+rent/rest/controller/util/RestCredentials.class
+rent/rest/controller/util/RestEndpoint.class

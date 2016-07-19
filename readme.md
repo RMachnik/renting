@@ -28,7 +28,6 @@ Domain objects should be created based on interfaces that will sit in repositori
 * repository-db - implementation of repository-api based on spring-data
 * repository-static - static implementation of repositories, mainly for testing domain
 that's why we need such repository-api, all repositories should return some dto implementations.
-* rest-api - interface of rest, this will be usefull for writing automated tests for rests
 * rest - module with all rest endpoints
 * mail - module responsible for sending emails
 
