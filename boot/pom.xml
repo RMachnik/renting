@@ -14,7 +14,12 @@
     <dependencies>
         <dependency>
             <groupId>renting</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>repository-db</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>renting</groupId>
+            <artifactId>rest</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
