@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: rent.rest.controller.user.RegistrationControllerTest
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.112 sec - in rent.rest.controller.user.RegistrationControllerTest

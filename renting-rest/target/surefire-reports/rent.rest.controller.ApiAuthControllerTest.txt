@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: rent.rest.controller.ApiAuthControllerTest
--------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.433 sec - in rent.rest.controller.ApiAuthControllerTest
