@@ -70,7 +70,7 @@ App:
 Domain:
 * panel: http://panel.xip.pl
 * login: wynajalem.pl
-* Hasło: RxF1zFl63z
+* pass : RxF1zFl63z
 
 To deploy app jenkins is doing scp on app box and putting jar into `/root/App/new` location. Then it is starting `start.sh` command.
 
@@ -80,4 +80,4 @@ To deploy app jenkins is doing scp on app box and putting jar into `/root/App/ne
 
 ### Email ### 
 email: renting.mgr@gmail.com
-pass: rentingApp1
+pass: rentingApp1 
