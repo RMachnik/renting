@@ -82,3 +82,4 @@ To deploy app jenkins is doing scp on app box and putting jar into `/root/App/ne
 email: renting.mgr@gmail.com
 pass: rentingApp1
 
+ 
