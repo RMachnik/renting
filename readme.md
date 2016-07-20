@@ -43,9 +43,6 @@ To fully enable lombok support in your IDE please use http://stackoverflow.com/a
 
 ### Aruba hosting panel ###
 
-* account LMatusiewicz 
-    Credentials: FPL-54844/vDRlU435#v
-    Panel  https://admin.dc3.arubacloud.pl/Login.aspx
 * account RMachnik - DC1-IT
     Login: FPL-54885
     pass: oAHqm324-o
