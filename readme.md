@@ -42,8 +42,15 @@ You need to have installed following apps to be able to build and run Renting-ba
 To fully enable lombok support in your IDE please use http://stackoverflow.com/a/14582541/1370062
 
 ### Aruba hosting panel ###
-* https://admin.dc3.arubacloud.pl/Login.aspx
-* credential FPL-54844/vDRlU435#v
+
+* account LMatusiewicz 
+    Credentials: FPL-54844/vDRlU435#v
+    Panel  https://admin.dc3.arubacloud.pl/Login.aspx
+* account RMachnik - DC1-IT
+    Login: FPL-54885
+    pass: oAHqm324-o
+    panel: https://admin.dc3.arubacloud.pl
+
 
 ### VPS servers ###
 
@@ -60,11 +67,16 @@ App:
 * deployment script: /root/App/start.sh
 * app url: 93.186.253.7:8080
 
+Domain:
+* panel: http://panel.xip.pl
+* login: wynajalem.pl
+* Hasło: RxF1zFl63z
+
 To deploy app jenkins is doing scp on app box and putting jar into `/root/App/new` location. Then it is starting `start.sh` command.
 
 ### Jenkins ###
-* url: http://89.36.217.76:8080
-* credential root/qwe_A7asd
+* url: http:/77.81.229.76:8080
+* credential admin/rentingApp1
 
 ### Email ### 
 email: renting.mgr@gmail.com

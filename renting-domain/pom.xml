@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>renting</groupId>
-            <artifactId>rest-api</artifactId>
+            <artifactId>api</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
