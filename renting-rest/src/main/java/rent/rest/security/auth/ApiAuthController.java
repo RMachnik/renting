@@ -1,8 +1,6 @@
 package rent.rest.security.auth;
 
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
@@ -37,13 +35,12 @@ import static rent.common.util.RestUtil.perform;
 import static rent.common.util.SerializationUtil.fromJson;
 import static rent.common.util.SerializationUtil.toJson;
 
-@Slf4j
+@Log4j2
 @RestController
 @RequestMapping("/auth")
 public class ApiAuthController {
 
     static final ErrorMessage ERROR_MESSAGE = new ErrorMessage("407", "Sorry, unable to authenticate.");
-    private static final Logger logger = LoggerFactory.getLogger(ApiAuthController.class);
 
     @Autowired
     AuthenticationProvider authenticationProvider;
@@ -61,7 +58,7 @@ public class ApiAuthController {
                 return notFound().build();
             }
         } catch (RuntimeException ex) {
-            logger.warn("Error while verifying user session.", ex);
+            log.warn("Error while verifying user session.", ex);
             return badRequest().body(toJson(ERROR_MESSAGE));
         }
     }

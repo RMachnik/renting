@@ -1,7 +1,6 @@
 package rent.rest.security;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,10 +17,10 @@ import static org.springframework.http.HttpMethod.OPTIONS;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
 
+@Log4j2
 @Configuration
 public class AllowedOriginsConfig {
 
-    private static final Logger logger = LoggerFactory.getLogger(AllowedOriginsConfig.class);
 
     @Value("${rest.allowed.origins:@null}")
     String allowedOrigins;
@@ -50,6 +49,6 @@ public class AllowedOriginsConfig {
     private void addAllowedOrigins(CorsConfiguration config) {
         final String[] allowed = allowedOrigins.split(",");
         Stream.of(allowed).forEach(origin -> config.addAllowedOrigin(origin));
-        logger.info("Configured allowed origins: {}", allowedOrigins);
+        log.info("Configured allowed origins: {}", allowedOrigins);
     }
 }

@@ -3,18 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>root</artifactId>
+        <artifactId>renting-app</artifactId>
         <groupId>renting</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>repository-db</artifactId>
+    <artifactId>renting-repository-db</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>renting</groupId>
-            <artifactId>repository-api</artifactId>
+            <artifactId>renting-api</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
@@ -23,7 +23,7 @@
         </dependency>
         <dependency>
             <groupId>renting</groupId>
-            <artifactId>mail</artifactId>
+            <artifactId>renting-mail</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>

@@ -1,11 +1,11 @@
 package rent.mail.impl;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import rent.mail.MailService;
 
-@Slf4j
+@Log4j2
 public class MailServiceImpl implements MailService {
 
     private final JavaMailSender javaMailSender;

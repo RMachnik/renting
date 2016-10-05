@@ -1,7 +1,6 @@
 package rent.rest.security.auth;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,6 +14,7 @@ import java.util.List;
 
 import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.logging.log4j.LogManager.getLogger;
 import static rent.rest.security.auth.UserRole.USER;
 
 public class AuthProviderImpl implements AuthenticationProvider {
@@ -26,7 +26,7 @@ public class AuthProviderImpl implements AuthenticationProvider {
     private final Logger logger;
 
     public AuthProviderImpl(Repositories repositories) {
-        this.logger = LoggerFactory.getLogger(AuthProviderImpl.class);
+        this.logger = getLogger(AuthProviderImpl.class);
         this.repositories = repositories;
     }
 

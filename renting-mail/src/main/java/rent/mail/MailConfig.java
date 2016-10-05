@@ -1,6 +1,6 @@
 package rent.mail;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.javamail.JavaMailSender;
 import rent.mail.impl.MailServiceImpl;
 
-@Slf4j
+@Log4j2
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan

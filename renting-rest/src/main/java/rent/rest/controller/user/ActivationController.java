@@ -1,6 +1,6 @@
 package rent.rest.controller.user;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +12,7 @@ import rent.repo.api.Repositories;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static rent.common.util.RestUtil.perform;
 
-@Slf4j
+@Log4j2
 @RestController
 @RequestMapping("/activate")
 public class ActivationController {

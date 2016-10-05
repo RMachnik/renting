@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>root</artifactId>
+        <artifactId>renting-app</artifactId>
         <groupId>renting</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>rest</artifactId>
+    <artifactId>renting-rest</artifactId>
     <properties>
         <spring.security.version>4.0.3.RELEASE</spring.security.version>
     </properties>
@@ -17,12 +17,12 @@
     <dependencies>
         <dependency>
             <groupId>renting</groupId>
-            <artifactId>repository-db</artifactId>
+            <artifactId>renting-repository-db</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>renting</groupId>
-            <artifactId>domain</artifactId>
+            <artifactId>renting-domain</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
@@ -45,7 +45,7 @@
         </dependency>
         <dependency>
             <groupId>renting</groupId>
-            <artifactId>repository-static</artifactId>
+            <artifactId>renting-repository-static</artifactId>
             <version>${project.parent.version}</version>
             <scope>test</scope>
         </dependency>

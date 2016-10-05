@@ -1,6 +1,6 @@
 package rent.rest.controller.user;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +16,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static rent.common.util.RestUtil.perform;
 import static rent.common.util.SerializationUtil.fromJson;
 
-@Slf4j
+@Log4j2
 @RestController
 @RequestMapping("/register")
 public class RegistrationController {

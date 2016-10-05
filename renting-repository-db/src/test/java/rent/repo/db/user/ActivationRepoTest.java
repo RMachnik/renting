@@ -3,8 +3,8 @@ package rent.repo.db.user;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import rent.mail.MailService;
 import rent.repo.api.user.ActivationDetailsDto;
@@ -18,7 +18,7 @@ import static rent.repo.stationary.user.StaticActivationDto.ACTIVATION_DETAILS_D
 import static rent.repo.stationary.user.StaticActivationDto.ACTIVATION_DTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = {
+@ContextConfiguration(classes = {
         RepoDbConfig.class,
         TestConfig.class,
 })
