@@ -13,9 +13,9 @@
         <module>renting-common</module>
         <module>renting-domain</module>
         <module>renting-rest</module>
+        <module>renting-repository-static</module>
         <module>renting-repository-db</module>
         <module>renting-api</module>
-        <module>renting-repository-static</module>
         <module>renting-mail</module>
     </modules>
 
