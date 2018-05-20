@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>renting</groupId>
-            <artifactId>repository-db</artifactId>
+            <artifactId>renting-repository-db</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
