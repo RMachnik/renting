@@ -32,7 +32,7 @@
         </dependency>
         <dependency>
             <groupId>renting</groupId>
-            <artifactId>repository-static</artifactId>
+            <artifactId>renting-repository-static</artifactId>
             <version>${project.parent.version}</version>
             <scope>test</scope>
         </dependency>
