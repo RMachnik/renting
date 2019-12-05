@@ -36,45 +36,15 @@ All app dependencies and libs are inside boot jar.
 
 You need to have installed following apps to be able to build and run Renting-backend.
 
-* java 1.8
+* java 12
 * maven
 * lombok plugin for Intellij - https://projectlombok.org/features/index.html
 To fully enable lombok support in your IDE please use http://stackoverflow.com/a/14582541/1370062
 
 ### Aruba hosting panel ###
 
-* account RMachnik - DC1-IT
-    Login: FPL-54885
-    pass: oAHqm324-o
-    panel: https://admin.dc3.arubacloud.pl
-
-
-### VPS servers ###
-
-Jenkins:
-
-* server ip: 89.36.217.76
-* credential root/qwe_A7asd
-
-App:
-
-* server ip: 93.186.253.7
-* credential root/rentingApp1
-* app folder: /root/App/running
-* deployment script: /root/App/start.sh
-* app url: 93.186.253.7:8080
-
-Domain:
-* panel: http://panel.xip.pl
-* login: wynajalem.pl
-* pass : RxF1zFl63z
-
-To deploy app jenkins is doing scp on app box and putting jar into `/root/App/new` location. Then it is starting `start.sh` command.
-
-### Jenkins ###
-* url: http:/77.81.229.76:8080
-* credential admin/rentingApp1
+ARUBA cloud
 
 ### Email ### 
 email: renting.mgr@gmail.com
-pass: rentingApp1 
+pass: *** 
